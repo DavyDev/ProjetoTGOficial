@@ -1,0 +1,203 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../../assets/fonts/TopoDicas/Poppins-Medium.ttf');
+}
+
+.ModalOverlay{
+  position: fixed;
+  top : 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  display: grid;
+  place-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+
+}
+
+
+
+
+.ModalPedidos{
+  background-color: #fff;
+  border-radius: 4px;
+
+
+  min-width: 1000px;
+
+
+  padding: 15px 25px;
+
+}
+
+.ModalPedidos_botaoFechar{
+  float: right;
+  background: unset;
+  border: unset;
+  cursor: pointer;
+
+  font-size: 20px;
+
+
+}
+
+.ModalPedidos_botaoFechar:hover{
+  color: #F94747;
+}
+
+.boxDetalhesPedidoEscolhido{
+
+  clear: both;
+
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+}
+
+.ImagemPedidoEscolhido{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px;
+}
+
+.PedidoEscolhidoTitulo{
+  text-align: center;
+  font-family: "Poppins";
+  color: #101010;
+}
+
+.PedidoEscolhidoDescricao p{
+  padding: 20px 20px ;
+  font-family: "Poppins";
+  color: #717171;
+  white-space: pre-line;
+
+  font-size: 14px;
+
+}
+
+.TipoDeServicos{
+  margin: 0px 20px 0px 20px ;
+
+  border-bottom: 1px solid rgba(63, 62, 62, 0.1);
+
+  font-family: "Poppins";
+  color: #717171;
+
+}
+
+.TituloDeServicos{
+  margin: 0px 0px 10px 0px;
+  font-family: "Poppins";
+
+  font-size: 13px;
+
+}
+
+.ImgTipoServicos{
+  display: flex;
+  align-items: center;
+}
+
+.ImgTipoServicos img{
+  width: 20px;
+  margin-right: 10px;
+}
+
+.ImgTipoServicos span{
+  font-family: "Poppins";
+  color: #717171;
+
+  font-size: 13px;
+}
+
+.PedidoEscolhidoPreco{
+  color: #717171;
+
+  padding: 10px 20px 30px 20px ;
+
+  font-family: "Poppins";
+  font-size: 15px;
+}
+
+.PeddoEscolhidoQntVal{
+  border-top: 1px solid rgba(63, 62, 62, 0.1);
+  margin: 20px 20px 20px 20px ;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.Qnt{
+  border: 1px solid rgba(63, 62, 62, 0.1);
+  padding: 15px 10px;
+
+}
+
+.Val button{
+  border: none;
+  border-radius: 4px;
+  padding: 15px 15px;
+
+  background-color: #F94747;
+  font-family: "Poppins";
+  color: #fff;
+  font-weight: 500;
+
+  outline: none;
+}
+.Val button:hover{
+
+
+  background-color: #d32323;
+  cursor: pointer;
+
+
+}
+
+.Val span{
+  margin: 0px 40px 0px 0px;
+}
+
+.DiminuirON{
+
+  outline: none;
+  border: none;
+
+  font-size: 48px;
+  margin: 0px 10px;
+
+  cursor: pointer;
+
+}
+.DiminuirOFF{
+  
+
+  outline: none;
+  border: none;
+
+  font-size: 48px;
+  margin: 0px 10px;
+
+  cursor: not-allowed;
+  
+}
+
+.Aumentar{
+
+
+  outline: none;
+  border: none;
+
+  font-size: 25px;
+  margin: 0px 10px;
+
+  cursor: pointer;
+
+}
+

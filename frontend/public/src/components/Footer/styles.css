@@ -1,0 +1,232 @@
+.DivFooter {
+  background-color: #E8AE68;
+
+}
+
+.footerDiv3{
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+
+}
+
+.separacao1 {
+  display: grid;
+  align-self: center;
+  /*border: 1px solid rgb(23, 255, 139);*/
+  padding: 22px 0px;
+  margin-top: 50px;
+}
+.separacao2{
+  /*border: 1px solid rgb(23, 255, 139);*/
+}
+.separacao3{
+  /*border: 1px solid rgb(23, 255, 139);*/
+  display: grid;
+  align-self: center;
+  padding: 22px 0px;
+  margin-top: 50px;
+}
+
+.SegundaDivFooter {
+  /*border: 1px solid #000;*/
+  display: flex;
+}
+
+.TerceiraDivFooter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/*Fontes------------------------------------------*/
+@font-face {
+  font-family: 'MonotonRegular';
+  src: url("../../assets/fonts/TituloFooter/Monoton-Regular.ttf");
+}
+@font-face {
+  font-family: 'PoppinsBold';
+  src: url("../../assets/fonts/menu_DropON/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: url("../../assets/fonts/TopoDicas/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: 'SulphurPointRegular';
+  src: url("../../assets/fonts/Search_Nav/SulphurPoint-Regular.ttf");
+}
+
+
+
+.titleLogo {
+  /*border: 1px solid greenyellow;*/
+  margin: 50px 0px 0px 0px;
+  text-align: center;
+}
+.titleLogo h1{
+  font-family: 'MonotonRegular';
+  font-weight: normal;
+}
+
+.linhaHr1 {
+  width: 100%;
+  padding: 0px 0px 0px 60px ;
+}
+
+.linhaHr1 hr{
+  width: 100%;
+  border: 2px solid #4B443C;
+
+}
+
+.SobreNos{
+  /*border: 1px solid #fff;*/
+  text-align: center;
+  color: #F94747;
+  font-family: 'PoppinsBold';
+  font-size: 14px;
+  width: 760px;
+}
+
+.SobreNos p {
+  color: #fff;
+  margin: 0px 55px;
+  word-spacing: 3px;
+}
+
+.RedesFooter {
+  /*border: 1px solid blueviolet;*/
+  width: 381px;
+
+}
+
+.Contato {
+  /*border: 1px solid #fff;*/
+  text-align: center;
+  color: #F94747;
+  font-family: 'PoppinsBold';
+  font-size: 14px;
+  /*border: mediumvioletred solid 1px;*/
+  width: 760px;
+}
+
+.Contato p {
+  color: #fff;
+  margin: 0px 55px;
+  word-spacing: 3px;
+}
+
+.linhaHr2 {
+  width: 100%;
+  padding: 0px 60px 0px 0px ;
+}
+
+.linhaHr2 hr{
+  width: 100%;
+  border: 2px solid #4B443C;
+}
+
+.Redes {
+  /*border: mediumvioletred 1px solid;*/
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 90px;
+}
+
+.Separador {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.LinhaSeparadora {
+  margin: 15px 0px 0px 0px;
+  border: 2px solid #4B443C;
+  height: 110px;
+}
+
+.RedeFace {
+  text-decoration: none;
+}
+.RedeInsta {
+  text-decoration: none;
+}
+
+
+.RedeFace img {
+  width: 60px;
+}
+
+.RedeFace img:hover {
+  width: 65px;
+}
+
+.RedeInsta img {
+  width: 60px;
+}
+.RedeInsta img:hover {
+  width: 65px;
+}
+
+textarea {
+  margin: 20px;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 385px;
+  height: 200px;
+
+  border-radius: 15px 15px 0px 0px;
+
+  font-size: 18px;
+  padding: 10px;
+  margin-bottom: 0px;
+  font-family: 'PoppinsMedium';
+  color: #4B443C;
+}
+
+textarea:focus {
+  border: 1px solid #229CFF;
+}
+
+.Submit {
+  width: 385px;
+  margin: 0px 0px 0px 20px;
+  padding: 5px;
+  border-radius: 0px 0px 10px 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: 'PoppinsMedium';
+  color: #4B443C;
+}
+
+.Submit:hover{
+  color: #229CFF;
+  cursor: pointer;
+}
+
+.LabelAerea {
+  color: #F94747;
+  font-family: 'PoppinsBold';
+  font-size: 20px;
+  /*border: 1px solid red;*/
+  text-align: center;
+
+  margin: 30px 0px 10px 0px;
+
+}
+
+
+
+.Desenvolvedor p{
+  text-align: center;
+
+   font-family: 'SulphurPointRegular';
+
+   padding: 25px 0px;
+}
+
+
+

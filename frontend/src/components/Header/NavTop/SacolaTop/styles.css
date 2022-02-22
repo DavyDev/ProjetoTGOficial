@@ -1,0 +1,306 @@
+@font-face {
+  font-family: "Righteous";
+  src: url("../../../../assets/fonts/Cardapio_Righteous/Righteous-Regular.ttf");
+}
+@font-face {
+  font-family: "SulphurPoint";
+  src: url("../../../../assets/fonts/Search_Nav/SulphurPoint-Regular.ttf");
+}
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("../../../../assets/fonts/TopoDicas/Poppins-Medium.ttf");
+}
+
+#divSacola {
+  cursor: pointer;
+}
+
+#divSacola img {
+  width: 40px;
+}
+
+.SacolaPedidosON{
+
+  position: absolute;
+
+  background-color: #fff;
+
+  width: 450px;
+  min-height: 100px;
+
+
+  border-top: 5px solid #F94747;
+  margin-top: 28px;
+  padding-bottom: 60px;
+  right: 48px;
+
+  border-radius: 0px 0px 24px 24px;
+
+}
+
+.SacolaPedidosOFF{
+  display: none;
+
+}
+
+.SacolaPedidosON p {
+  text-align: center;
+  font-family: "Righteous";
+  font-size: x-large;
+  color: #717171;
+
+  margin-top: 30px;
+}
+
+.FormaPagamento{
+  margin: 0px 30px 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "SulphurPoint";
+  color: hsla(0, 0%, 0%, 0.651);
+}
+
+.TotalPedidos{
+  margin-top: 30px;
+}
+.TotalPedidos hr{
+  margin-right: 30px;
+}
+
+.TotalPagamento{
+  margin: 0px 30px 0px 30px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.TotalValor{
+
+
+  font-family: "SulphurPoint";
+  color: #000;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.PreçoPedidosSacolas{
+  font-family: "Poppins-Medium";
+  color: #50A773;
+}
+
+.tituloSacola{
+  margin: 0px 0px 35px 0px;
+}
+
+.ajustaDadosPedidos{
+  margin: 0px 30px 0px 30px;
+}
+
+.cadaPedidoDaSacola hr{
+  border-top: 1px solid rgba(63, 62, 62, 0.1);
+  border-bottom: 1px solid rgba(63, 62, 62, 0.1);
+  margin:0px 30px 0px 0px;
+}
+
+.pedidoTitulo {
+  color: #3f3e3e;
+  font-family: "SulphurPoint";
+  font-size: 19px;
+  margin: 0px 0px 10px 0px;
+}
+
+.gridEditarEPreco {
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
+.gridEditarEPreco div{
+
+}
+
+.AreaSacola{
+  position: relative;
+}
+
+.ToolTipSacola{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: -5px;
+  right: -8px;
+
+  border-radius: 180px;
+
+  font-family: "Poppins-Medium";
+  color: #fff;
+
+
+
+  font-size: 12px;
+  text-align: center;
+  background-color: #000;
+}
+
+.sacolaVazia{
+  text-align: center;
+  font-family: "Righteous";
+  font-size: 15px;
+
+}
+
+.sacolaVazia2{
+  text-align: center;
+  font-family: "Righteous";
+  font-size: 12px;
+  color: #717171;
+
+}
+
+.hrDivisa{
+  margin: 2px 7% 0px 0px;
+  border: 1px solid #71717134 ;
+}
+
+#removerPedidoSacola {
+  font-family: "SulphurPoint";
+  color: #717171c2;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 1px;
+
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+  cursor: pointer;
+  outline: none;
+}
+
+.FinalizaPedidos {
+  /*display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 15px;*/
+}
+
+.FinalizaPedidos input {
+  /*outline: none;
+  border: 1px solid #717171;
+  padding: 11px; 
+  border-right: none;
+  border-radius: 0px 0px 0px 0px;
+  font-size: 16px;*/
+}
+
+.FinalizaPedidos button {
+  /*font-family: "Poppins";
+  background-color: #F94747;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: #fff 2.5px dashed;
+  border-radius: 0px 5px 5px 0px;
+  color: #fff;*/
+}
+.FinalizaPedidos button:hover {
+  /*cursor: pointer;
+  background-color: #c91f1f;
+  color: #fff;*/
+}
+
+.divNomeCliente{
+  display: flex;
+
+  margin: 20px 30px 0px 30px;
+}
+.boxNomeCliente{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 115px;
+  font-family: "Poppins";
+  background-color: #F94747;
+  
+  font-size: 15px;
+  font-weight: bold;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 5px 0px 0px 5px;
+  color: #fff;
+}
+.divNomeCliente input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #717171;
+  padding: 11px; 
+  border-left: none;
+  border-radius: 0px 0px 0px 0px;
+  font-size: 16px;
+}
+
+.divNumeroCliente{
+  display: flex;
+
+  margin: 5px 30px 0px 30px;
+}
+.boxNumeroCliente{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 115px;
+  font-family: "Poppins";
+  background-color: #F94747;
+  
+  font-size: 15px;
+  font-weight: bold;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 5px 0px 0px 5px;
+  color: #fff;
+}
+.divNumeroCliente input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #717171;
+  padding: 11px; 
+  border-left: none;
+  border-radius: 0px 0px 0px 0px;
+  font-size: 16px;
+}
+
+.divBotaoFinalizaPedido{
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.divBotaoFinalizaPedido button{
+  outline: none;
+  border: none;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.divBotaoFinalizaPedido button:hover {
+  cursor: pointer;
+  background-color: #c91f1f;
+  color: #fff;
+}

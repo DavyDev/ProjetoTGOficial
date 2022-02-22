@@ -1,0 +1,116 @@
+.ContainerCards {
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+    box-shadow: 0px 1px 4px 0 rgba(192, 208, 230, 0.8);
+    border-top: 20px solid rgba(230, 236, 245, 0.55);
+    cursor: grab;
+}
+
+.ContainerCards header {
+    position: absolute;
+    top: -22px;
+    left: 15px;
+}
+
+.ContainerCards p {
+    font-weight: 500px;
+    line-height: 20px;
+}
+
+.ContainerCards img {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    margin-top: 5px;
+    
+}
+
+.ContainerCards label {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+    background: #7159c1;
+}
+
+.containerTasksContent {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.068);
+    margin-bottom: 15px;
+    min-height: 100px;
+}
+
+.taskNomeCliente{
+    min-height: 25px;
+    padding: 5px 5px;
+    background-color: #c1ba592d;
+    font-family: "Poppins";
+    margin-bottom: 0px;
+}
+
+.taskNomeCliente p{
+    display: inline-block;
+    text-align: center;
+}
+
+.taskTituloProduto{
+    min-height: 25px;
+    padding: 5px 5px;
+    background-color: #7159c12d;
+    font-family: "Poppins";
+    margin-bottom: 10px;
+}
+
+.taskTituloProduto p{
+    display: inline-block;
+    text-align: center;
+}
+
+.taskDescricaoProduto{
+    min-height: 25px;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+}
+
+.taskDescricaoProduto p{
+    display: inline-block;
+    text-align: center;
+}
+
+.taskQntPrecoProduto{
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskQntProduto{
+    display: flex;
+    justify-content: center;
+    background-color: rgba(173, 216, 230, 0.438);
+    width: 50%;
+}
+
+.taskQntProduto p{
+    margin: 0px 5px;
+
+}
+
+.taskPrecoProduto{
+
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    background-color: rgba(144, 219, 83, 0.822);
+}
+
+
+.taskPrecoProduto p{
+    margin: 0px 5px;
+
+}

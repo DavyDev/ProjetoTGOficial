@@ -1,0 +1,358 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  
+}
+
+
+.Container {
+  position: relative;
+  width: 100%;
+}
+
+.Navegation {
+  max-height: 100vh;
+  background: #003147;
+  transition: 0.5s;
+  overflow-x: hidden;
+}
+
+.BotaoON {
+  width: 300px;
+}
+.BotaoOFF {
+  width: 60px;
+}
+
+.Navegation ul {
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  width: 100% ;
+}
+
+.Navegation ul li {
+
+  width: 100%;
+  list-style: none;
+}
+
+.Navegation ul li:hover {
+  background: #03a9f4;
+}
+.Navegation ul li:nth-child(1) {
+  margin-bottom: 20px;
+}
+
+.Navegation ul li:nth-child(1):hover {
+  background: transparent;
+}
+
+.Navegation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+}
+
+.Navegation ul li a .Icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+
+.Icon img {
+  max-width: 25px;
+  font-size: 24px;
+}
+
+.Navegation ul li a .Title {
+  position: relative;
+  display: block;
+  padding: 0px 10px;
+  height: 60px;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+.main {
+  position: absolute;
+
+  top: 0px;
+  left: 300px;
+  min-height: 100vh;
+
+  background: #f5f5f5;
+  transition: 0.5s;
+}
+
+.MainON{
+  width: calc(100% - 300px);
+  left: 300px;
+}
+.MainOFF{
+  width: calc(100% - 60px);
+  left: 60px;
+}
+
+.main .TopBar {
+  width: 100%;
+  background: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.IrformacoesGerais {
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 50px;
+  text-align: center;
+
+  margin: 0 auto 0 auto;
+  
+
+  color: #fff;
+  position: relative;
+  top: -10px;
+  width: 90%;
+  margin: 0px auto 0px auto;
+  background: #003147;
+  height: 170px;
+
+  border-radius: 6px;
+}
+
+.IrformacoesGerais div{
+  color: #f5f5f5;
+  background-color: #03a9f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto 10px auto;
+  
+  
+
+}
+.Toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 75px;
+}
+
+.Toggle img {
+    width: 25px;
+
+
+}
+
+.search {
+  position: relative;
+  width: 30%;
+  margin: 0px auto 0px auto;
+}
+
+.search label {
+  position: relative;
+}
+
+.search img {
+  width: 24px;
+  position: absolute;
+  left: 15px;
+  top: -3px;
+}
+
+.search label input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 45px;
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+#pintaDeAzul{
+  background-color: #03a9f4;
+
+}
+
+.botõesCriarOuEditar {
+  margin:  0px 5%;
+}
+
+.CadastrarNovo {
+  margin: 0px 10px 0px 0px;
+  text-align: center;
+  padding: 5px;
+
+}
+.ListarEditar {
+  margin: 0px 10px 0px 0px;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.listaCriaEdita {
+  padding: 10px;
+  margin: 0% 5% 3% 5%;
+  border: 1px solid rgb(19, 216, 62);
+  display: grid;
+  grid-template-columns: 0.8fr 1fr ;
+  gap: 10px;
+  height: 430px;
+}
+
+.listagemOpçõesMenus {
+  border: 1px solid rgb(52, 163, 52);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+  
+}
+
+.pedidosRelacionados {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 1px solid rgb(86, 26, 224);
+  max-height: 450px;
+}
+
+
+
+
+.pedidosRelacionados ul thead tr td:nth-child(1) {
+  border: 0.5px solid red;
+  width: 60px;
+  text-align: center;
+
+}
+.pedidosRelacionados ul thead tr td:nth-child(2) {
+  border: 0.5px solid rgb(0, 255, 21);
+  width: 400px;
+  padding-left: 5px;
+}
+.pedidosRelacionados ul thead tr td:nth-child(3) {
+  border: 0.5px solid rgb(66, 147, 212);
+  width: 115px;
+  padding-left: 5px;
+}
+.pedidosRelacionados ul thead tr td:nth-child(4) {
+  border: 0.5px solid rgb(0, 255, 21);
+  width: 125px;
+  padding-left: 5px;
+}
+
+.OptionTapiocaCrepioca, .OptionLanches, .OptionSaladas, .OptionBebidas, .OptionSobremesas, .OptionDoces {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 20px;
+  color: #003147;
+
+  border-radius:5px;
+
+  max-height: 150px;
+} 
+
+.algun{
+  text-align: center;
+  padding: 15px;
+
+  border: 1px solid red;
+}
+.algun2{
+
+  padding: 15px;
+
+  border: 1px solid red;
+}
+.algun3{
+  text-align: center;
+  padding: 15px;
+
+  border: 1px solid red;
+}
+.algun4{
+  display: flex;
+  
+  justify-content: space-around;
+  align-items: center;
+
+  
+  padding: 15px 0px 15px 0px ;
+
+  border: 1px solid red;
+
+}
+
+.edicaoTopo  {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+}
+.edicaoTopo div {
+  border: 1px solid red;
+}
+
+.edicaoVoltar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edicaoTitulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edicaoInputsoForm {
+  border: 1px solid red;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.InputsForm {
+  margin-top: 5px;
+  border: 1px solid blue ;
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
+  padding: 0px 0px 0px 10px;
+}
+
+.BoxEscolhas {
+  border: 1px solid gold;
+}
+
+.EditarListar{
+  margin: 0px 10px 0px 0px;
+  text-align: center;
+  padding: 5px;
+}
+

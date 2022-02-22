@@ -1,0 +1,299 @@
+.header {
+  position: relative;
+  background-color: #E5E5E5;
+  width: 100%;
+  padding-bottom: 10px;
+
+  /* background-color: #f7f7f7 ;  usar esta cor para o Header */
+}
+
+/*Fontes------------------------------------------*/
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: url("../../assets/fonts/TopoDicas/Poppins-Medium.ttf");
+}
+@font-face {
+  font-family: 'PopspinSemiBold';
+  src: url("../../assets/fonts/menu_DropON/Poppins-SemiBold.ttf");
+}
+
+
+
+
+
+/*Topo dicas*/
+
+#hr_1{
+  border: none;
+  width: 95%;
+  height: 5px;
+
+  margin: 0px auto;
+  background-color: #717171;
+}
+
+#hr_2{
+  border: none;
+  width: 95%;
+  height: 7px;
+
+  margin: 0px auto;
+  background-color: #E8AE68;
+}
+
+.DicasBox{
+  border: black 1px solid;
+  border-radius: 12px;
+  background-color: #000;
+  width: 800px;
+  margin: 60px auto 100px auto;
+
+}
+
+.DicasBox h1 {
+  margin-top: 20px;
+
+
+  font-family: 'PoppinsMedium';
+  color: #fff;
+  text-align: center;
+}
+
+.EtapasDicas{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 100px;
+
+
+}
+
+.Dica1{
+  height: 50px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'PoppinsMedium';
+  display: flex;
+  margin: 0px 15px 40px 10px;
+  border-radius: 7px;
+
+}
+
+.Dica1 h2{
+  margin-left: 10px;
+  line-height: 50px;
+
+}
+
+.Dica1 p{
+  text-align: center;
+  margin-left: 10px;
+  line-height: 50px;
+
+}
+
+.Dica2{
+  height: 50px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'PoppinsMedium';
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+
+  margin: 0px 0px 40px 0px;
+  border-radius: 7px;
+}
+
+.Dica2 h2{
+  margin-left: 10px;
+  line-height: 50px;
+
+}
+
+.Dica2 p{
+  text-align: center;
+  margin-left: 10px;
+  line-height: 50px;
+
+}
+
+.Dica3{
+  height: 50px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'PoppinsMedium';
+  text-align: center;
+  display: flex;
+
+
+  margin: 0px 10px 40px 15px;
+  border-radius: 7px;
+}
+
+.Dica3 h2{
+  margin-left: 10px;
+  line-height: 50px;
+
+}
+
+.Dica3 p{
+  margin-left: 10px;
+
+
+}
+
+.divCaféPaes {
+  border-radius: 12px;
+  width: 800px;
+  height: 258px;
+  margin: 60px auto 100px auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.boxOne{
+  background: linear-gradient(230deg, rgba(251,224,181,1) -10%, rgba(195,160,111,1) 90%);
+  border-radius: 30px;
+  display: grid;
+  grid-template-rows: 0.8fr 1fr;
+  cursor: pointer;
+    /*Ao clicar no box é direcionado para a pagina que tem pedidos*/
+
+
+}
+
+.boxOne h1{
+
+  padding: 20px;
+  font-family: 'Righteous';
+  font-weight:normal;
+  color: #fff;
+
+}
+
+.boxTwo{
+  background: linear-gradient(200deg, rgba(154,73,36,0.72) 15%, rgba(192,137,47,0.65) 50%);
+  border-radius: 30px;
+  display: grid;
+  grid-template-rows: 0.8fr 1fr;
+  cursor: pointer;
+  /*Ao clicar no box é direcionado para a pagina que tem pedidos*/
+}
+.boxTwo h1{
+
+  padding: 20px;
+  font-family: 'Righteous';
+  font-weight:normal;
+  color: #fff;
+}
+
+.divButtonImage1{
+
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.divButtonImage1 a {
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+
+  color: #fff;
+  font-family: 'PopspinSemiBold';
+  font-size: 16px;
+
+
+  background-color: rgba(0, 0, 0, 0.151);
+  width: 150px;
+  margin: 0px auto 0px auto;
+  padding: 5px 0px;
+
+  border-radius: 12px;
+}
+
+.divButtonImage1 a:hover{
+  background-color: rgba(0, 0, 0, 0.226);
+}
+
+.divButtonImage1 a img {
+  width: 20px;
+  margin: auto 0px auto 5px;
+
+  transform: rotate(180deg);
+}
+
+.escolheImg1{
+
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.escolheImg1 img{
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  max-height: 118px;
+}
+
+
+
+.divButtonImage2{
+
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.divButtonImage2 a {
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+
+  color: #fff;
+  font-family: 'PopspinSemiBold';
+  font-size: 16px;
+
+
+  background-color: rgba(0, 0, 0, 0.151);
+  width: 150px;
+  margin: 0px auto 0px auto;
+  padding: 5px 0px;
+
+  border-radius: 12px;
+}
+
+.divButtonImage2 a:hover{
+  background-color: rgba(0, 0, 0, 0.226);
+}
+
+.divButtonImage2 a img {
+  width: 20px;
+  margin: auto 0px auto 5px;
+
+  transform: rotate(180deg);
+}
+
+.escolheImg2{
+
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.escolheImg2 img{
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  max-height: 118px;
+}
+

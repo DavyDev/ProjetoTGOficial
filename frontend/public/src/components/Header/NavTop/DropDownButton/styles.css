@@ -1,0 +1,103 @@
+/*Fontes ----------------------------------------------------*/
+  @font-face {
+    font-family: 'Righteous';
+    src: url('../../../../assets/fonts/Cardapio_Righteous/Righteous-Regular.ttf');
+  }
+
+  @font-face {
+    font-family: 'PoppinsSemiBold';
+    src: url('../../../../assets/fonts/menu_DropON/Poppins-SemiBold.ttf');
+  }
+
+
+/*Fonte Cardapio*/
+.font-Cardapio {
+font-family: 'Righteous';
+font-size: 20px;
+color: #717171;
+margin-left: 6px;
+text-align: center;
+}
+
+.font-Cardapio img {
+  width: 20px;
+  transform: rotate(180deg);
+}
+
+.font-CardapioON{
+  font-family: 'Righteous';
+  font-size: 20px;
+  color: #717171;
+  margin-left: 6px;
+  text-align: center;
+}
+
+.font-CardapioON img {
+  width: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.font-CardapioON img:focus {
+  width: 20px;
+  transform: rotate(0deg);
+}
+
+.font-CardapioON img:focus {
+  width: 20px;
+  transform: rotate(0deg);
+}
+
+/*Fonte MenuDropON*/
+.menu-Drop-ON li {
+  padding: 0.3em 1em 0.4em 0.6em;
+  font-family: 'PoppinsSemiBold';
+  font-size: 16px;
+  color: #717171;
+}
+
+.menu-Drop-ON hr {
+  width: 100%;
+  height: 3px;
+  padding-right: 5px;
+  background-color: rgba(0, 0, 0, 0.155);
+  border: none;
+}
+
+.menu-Drop-ON li:hover {
+  background-color: #3e3e3e1c;
+  font-size: 17px;
+  padding: 0.3em 0.4em 0.4em 0.5em;
+}
+
+
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+.menu{
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.menu-Drop-ON {
+  margin-top: 38px;
+  border-top: 4px solid #F94747;
+  position: absolute;
+  left: 0px;
+  background-color: #F7F7F7;
+  border-radius: 0px 0px 6px 6px;
+}
+
+.menu-Drop-OFF {
+  display: none;
+}
+
+
+
+
