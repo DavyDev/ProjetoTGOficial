@@ -56,7 +56,7 @@ function ProdutosLoja() {
 
 
   const mostrandoDados = () => {
-    //console.log(pedidosMenu[0].titulo)
+    console.log(pedidosMenu)
   }
 
 
@@ -68,7 +68,7 @@ function ProdutosLoja() {
       <div className='Pedidos'>
         <button onClick={mostrandoDados}>Tesando</button>
         {pedidosMenu.map((carro, i) => {
-          return (<div key={i} className="ProdutosLoja" onClick={() => { escolhendoPedido({key: i, titulo: carro.titulo, descricao: carro.descricao, preco: carro.preco, imagem: carro.imagem, quantidade: carro.quantidade }) }}>
+          return (<div key={i} className="ProdutosLoja" onClick={() => { escolhendoPedido({key: i, id: carro.id, titulo: carro.titulo, descricao: carro.descricao, preco: carro.preco, imagem: carro.imagem, quantidade: carro.quantidade }) }}>
 
             <div className="Grid1">
               <p className="TituloPedido">

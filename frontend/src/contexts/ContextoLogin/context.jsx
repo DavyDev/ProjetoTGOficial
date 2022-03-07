@@ -61,6 +61,9 @@ export const ContextoLoginProvider = ({ children }) => {
             console.log(res.data)
             if(res.data.verificado == true && res.data.password == true) {
 
+                console.log("¬¬¬¬¬¬¬¬¬¬¬¬")
+                console.log(res.data.usuarioFounded.id)
+                console.log("¬¬¬¬¬¬¬¬¬¬¬¬")
                 setLoggedUser(res.data.usuarioFounded)
                 
                 
@@ -117,7 +120,7 @@ export const ContextoLoginProvider = ({ children }) => {
 
     return (
 
-        <ContextoLogin.Provider value={{ authenticated: Boolean(userAuthenticated), userAuthenticated, loading, login, logout }}>
+        <ContextoLogin.Provider value={{ authenticated: Boolean(userAuthenticated), userAuthenticated, loading, loggedUser, login, logout }}>
             { children }
         </ContextoLogin.Provider>
     )

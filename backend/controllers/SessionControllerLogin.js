@@ -13,7 +13,7 @@ class SessionControllerLogin {
         console.log(req.body.email)
         console.log("teste-------")
         const user ={
-            
+            nomeUsuario: req.body.nomeusuário,
             email: req.body.email,
             password: req.body.password,
             token: jwt.sign( {id: "123"}, auth.secret, { expiresIn: auth.expiresIn } )
@@ -81,11 +81,11 @@ class SessionControllerLogin {
             }
         })
 
-        console.log("---^^")
+        /*console.log("---^^")
         console.log(userLogando)
         console.log(verifyUserExists)
 
-        console.log(verifyUserExists[0].password)
+        console.log(verifyUserExists[0].password)*/
         /*bcrypt.compare(userLogando.password, verifyUserExists[0].password, (error, result) => {
             if (error){
                 return console.log("Deu errado")
@@ -116,6 +116,7 @@ class SessionControllerLogin {
                             id: verifyUserExists[0].id, 
                             email: verifyUserExists[0].email,
                             token: verifyUserExists[0].token,
+                            nomeUsuario: verifyUserExists[0].nomeUsuario,
                             
                         }
                     })

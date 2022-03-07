@@ -8,7 +8,10 @@ const Clientes = db.define('clientes', {
         allowNull: false,
         primaryKey: true
     },
-    
+    nomeUsuario:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false

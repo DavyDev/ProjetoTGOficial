@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('./db')
 const Clientes = require('./clientes')
+const Pedidos = require('./pedidos')
 
 const ProdutosPedidos = db.define('ProdutosPedidos', {
     id: {
@@ -31,28 +32,32 @@ const ProdutosPedidos = db.define('ProdutosPedidos', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    emailCliente: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    passwordCliente: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     pertenceColumn: {
         type: Sequelize.STRING,
         allowNull: false
     }
 });
 
-ProdutosPedidos.belongsTo(Clientes, {
+//Este é de teste
+
+Pedidos.hasMany(ProdutosPedidos, {
+    foreignKey: "IdPedidos"
+})
+/*
+ProdutosPedidos.belongsTo(Pedidos, {
+    constraint: true,
+    foreignKey: 'IdPedidos'
+})*/
+
+//Oficial abaixo
+/*ProdutosPedidos.belongsTo(Pedidos, {
     constraint: true,
     foreignKey: 'IdCliente'
-})
+})*/
 
-Clientes.hasMany(ProdutosPedidos, {
+/*Clientes.hasMany(ProdutosPedidos, {
     foreignKey: 'IdCliente'
-})
+})*/
 
 //Criar a tabelano bando de dados
 //ProdutosPedidos.sync()

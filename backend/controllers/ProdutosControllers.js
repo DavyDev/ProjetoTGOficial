@@ -45,7 +45,7 @@ class ProdutosController {
             if(!ListDosProdutos) return res.status(404).json("Não existe produtos para ser Listado");
             return res.status(200).json(ListDosProdutos)
         }
-        else if(validaExisteParams == true){
+        /*else if(validaExisteParams == true){
             console.log("Parametro não existe")
             const ListDosProdutos = await CadastrarProdutos.findAll({
                 where: {
@@ -53,7 +53,9 @@ class ProdutosController {
                 }
               })
               return res.status(200).json(ListDosProdutos)
-        }
+        }*/
+
+
         /*const ListDosProdutos = await CadastrarProdutos.findAll();
         //const ListDosProdutos = await CadastrarProdutos.findByPk(id);
         if(!ListDosProdutos) return res.status(404).json("Não existe produtos para ser Listado");
