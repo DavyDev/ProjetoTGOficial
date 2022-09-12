@@ -44,8 +44,10 @@ export function List({ data }) {
 
 export function Column(props) {
     
-    //console.log('Segue abaixo as props:')
-    //console.log(props)
+    console.log('Segue abaixo as props:')
+    console.log(props.tasks)
+
+    
     
     return(
         

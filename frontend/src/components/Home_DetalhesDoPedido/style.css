@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'PoppinsMedium';
+    src: url("../../assets/fonts/TopoDicas/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: 'PoppinsSemibold';
+    src: url("../../assets/fonts/menu_DropON/Poppins-SemiBold.ttf");
+}
+
+.DivHome{
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.detalhesDoPedido{
+    
+    
+    width: 550px;
+    margin: 50px auto 0px auto;
+}
+
+.detalhesVoltar{
+    text-align: end;
+    font-family: 'PoppinsMedium';
+    color: #A6A5A5;
+    cursor: pointer;
+}
+
+.visualizar_Cardapio{
+    text-align: center;
+    color: #F94747;
+    font-family: 'PoppinsMedium';
+    cursor: pointer;
+    /* border: 1px solid violet; */
+    margin-top: 25px;
+}
+
+.tituloDoLocal{
+    color: #101010;
+    font-family: 'PoppinsSemibold';
+    font-size: 25px;
+}
+
+.divDosProds{
+    border-bottom: 1px solid #d9d9d963;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px 10px 0px;
+    font-family: 'PoppinsMedium';
+    color: #101010c3;;
+}
+
+.subtotalETotal{
+    border-bottom: 1px solid #d9d9d963;
+}
+
+.divSubtotal{
+    font-family: 'PoppinsMedium';
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px ;
+}
+.divTotal{
+    font-family: 'PoppinsMedium';
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px ;
+    
+}
+
+.divTipoDeServico, .divNumDoPedido, .divFormaDePagamento, .divStatusDoPedido, .divDataDoPedido{
+    padding: 5px 0px;
+    font-family: 'PoppinsMedium';
+    color: hsla(0, 0%, 0%, 0.562);
+    border-bottom: 1px solid #d9d9d963;
+}
+
+.como, .Num, .formaEscolhida, .status, .data{
+    
+    font-family: 'PoppinsMedium';
+    color: hsla(0, 0%, 0%, 0.795);
+    padding: 5px 0px;
+}
+
+.setaDetalhes{
+    transform: rotate(270deg);
+    width: 10px;
+    color: #101010;
+    /* border: 1px solid red; */
+    padding: 0px 0px 5px 0px;
+}
+
+.detalhesVoltar {
+    display: flex;
+    justify-content: end;
+}
+
+.detalhesVoltar div{
+    /* border: 1px solid red; */
+}

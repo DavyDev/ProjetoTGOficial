@@ -1,6 +1,7 @@
 
 import './style.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 import DashLogoDeck from '../../assets/icons/DashHeader/DashLogoDeck.svg'
 import DashCadastraProdutos from '../../assets/icons/DashHeader/DashCadastraProdutos.png'
@@ -26,6 +27,21 @@ function DashConsultaEstoque() {
   }
   console.log(estadoBotao)
   console.log(estadoMain)
+
+  const cadastrandoItens = (event) => {
+    event.preventDefault()
+
+    console.log(event.target.nomeDoItem.value)
+    console.log(event.target.qntEstoqueDoItem.value)
+
+    axios.post("http://localhost:3002/registraItensDosProdutos", {
+      nomeDoItem: event.target.nomeDoItem.value,
+      qntEstoqueDoItem: Number(event.target.qntEstoqueDoItem.value)
+    })
+    //.then((resposta) => resposta.json())
+      .then((resposta) => console.log(resposta.data))
+      .catch(() => console.log("Deu Errado"))
+  }
 
 
   return(
@@ -111,9 +127,25 @@ function DashConsultaEstoque() {
             </label>
           </div>
         </div>
-        <div>
+        
+        <div >
           <p>teste Consultar Estoque</p>
+          <form className='registraItemsEstoque' onSubmit={(event) => cadastrandoItens(event)}>
+            <div className="edicaoInputsoForm">
+              <label  htmlFor="nomeDoItem">Nome do item</label><br />
+              <input name="nomeDoItem"/>
+            </div>
+
+            <div className="edicaoInputsoForm">
+              <label  htmlFor="quntEstoqueDoItem">Quantidade (Inicial) em estoque</label><br />
+              <input type="number" name="qntEstoqueDoItem"/>
+            </div>
+
+            <button type="submit">Cadastrar Item</button>
+          </form>
         </div>
+
+
       </div>
     </div>
   )

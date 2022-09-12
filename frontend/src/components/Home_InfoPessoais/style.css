@@ -1,0 +1,126 @@
+@font-face {
+    font-family: "PoppinsMedium";
+    src: url('../../../src/assets/fonts/TopoDicas/Poppins-Medium.ttf');
+}
+
+.visualizarDadosNomeCelular{
+    background-color: #E5E5E5;
+    height: 570px;
+    padding-top: 60px;
+}
+
+.MeusDados_NomeCelular{
+    border: rgb(255, 255, 255) 1px solid;
+    border-radius: 12px;
+    background-color: #fff;
+    width: 430px;
+    margin: 0px auto 100px auto;
+    padding-bottom: 20px;
+}
+.MeusDados_NomeCelular h1{
+    font-family: 'PoppinsMedium';
+    color: #353536;
+    text-align: center;
+    margin: 25px 0px 5px 0px;
+}
+
+.instrucoDeManterDadosAtualizados{
+    font-family: 'PoppinsMedium';
+    color: #5c5c5c;
+    font-size: 13px;
+    margin: 0px 20px;
+    word-break: break-all;
+    
+}
+
+.inputsDeNomeCelular{
+    display: grid;
+    grid-template-columns: 1fr 0.6fr;    
+    margin: 20px 20px 0px 20px;
+    gap: 10px;
+    font-family: 'PoppinsMedium';
+}
+
+.divNome_MeusDados {
+    
+    /* border: 1px solid red; */
+    /* margin-left: 20px; */
+}
+
+.divCelular_MeusDados{
+    /* border: 1px solid red; */
+    /* margin-right: 20px; */
+
+}
+
+#Nome_MeusDados{
+    width: 100%;
+    border-radius: 3.5px;
+    outline: none;
+    border: 2.5px solid #a4a4a4;
+    padding: 5px 0px 5px 14px;
+}
+#Nome_MeusDados::placeholder{
+    font-family: 'PoppinsMedium';
+    color: #000;
+}
+#Celular_MeusDados::placeholder{
+    font-family: 'PoppinsMedium';
+    color: #000;
+}
+
+#Celular_MeusDados{
+    width: 100%;
+    outline: none;
+    border-radius: 3.5px;
+    padding: 5px 0px 5px 14px;
+    border: 2.5px solid #a4a4a4;
+}
+
+.Salvar_Voltar{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.voltarParaMeusDados{
+    background-color: #fff;
+    color: #F94747;
+    text-align: center;
+    justify-content: center;
+    padding: 5px 15px;
+    margin-right: 20px;
+    border: 2px solid #F94747;
+    border-radius: 3.5px;
+    font-family: 'PoppinsMedium';
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.salvarNovoNomeCelular{
+    background-color: #F94747;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    padding: 5px 15px;
+    border: 2px solid #F94747;
+    border-radius: 3.5px;
+    font-family: 'PoppinsMedium';
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.mostrandoNomeCelularCadastrados{
+    margin: 10px 20px;
+    font-family: 'PoppinsMedium';
+}
+.apresentaNomeCelular{
+    color: #50A773;
+}
+
+
+
+.divApresentaNome{
+    margin-bottom: 10px;
+}

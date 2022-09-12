@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import './style.css'
 
 import tipoDeServico from "../../../assets/images/tipoDeServico/tipoDeServico.svg";
@@ -22,18 +22,20 @@ function ModalPedidos(props) {
 
   const [quantiEVal, setQuantiEVal] = useState(1)
   const [habilitaBotaoMenos ,setHabilitaBotaoMenos] = useState(false)
-
+  
   const diminuirDropOn = habilitaBotaoMenos ? "DiminuirOFF" : "DiminuirON"
+  
+  const comentariosFeitosNosPedidos = useRef(null)
 
   useEffect(() => {
     //console.log(quantiEVal)
-    //console.log(quantiEVal)
-    pedido = {...pedido, quantidade: quantiEVal }
-    pedido = {...pedido, preco: (pedido.preco * quantiEVal).toFixed(2) }
+    console.log("!@!@!@!@!@!@!@!@!@!")
+    pedido = {...pedido, quantidade: Number(quantiEVal)}
+    // pedido = {...pedido, preco: (pedido.preco * quantiEVal).toFixed(2) }
     console.log(pedido)
 
     if (quantiEVal <= 1){
-      console.log("Aqui émenor ou igual a 1")
+      console.log("Aqui é menor ou igual a 1")
       setHabilitaBotaoMenos(true)
     }
     else{
@@ -84,9 +86,13 @@ function ModalPedidos(props) {
   }
 
   function enviaProContextGeral() {
-    enviaPara_VariavelGlobal(pedidoDispatch, {...pedido, codRandon: numeroRandon})
+    
+    console.log("77777777")
+    console.log(pedidoState)
+    enviaPara_VariavelGlobal(pedidoDispatch, {...pedido, quantidade: quantiEVal, preco: (pedido.preco * quantiEVal).toFixed(2), codRandon: numeroRandon, comentario: comentariosFeitosNosPedidos.current.value})
     props.onClickClose()
-
+    console.log({...pedido, comentario: comentariosFeitosNosPedidos.current.value})
+    console.log("Olha o pedido aqui")
     numeroRandon = (numeroRandon + 1)
   }
 
@@ -218,7 +224,7 @@ const addSacola = async () => {
     <>
       <div className="ModalOverlay">
         <div className='ModalPedidos'>
-          <button className="ModalPedidos_botaoFechar" onClick={props.onClickClose}>X</button>
+          <button className="ModalPedidos_botaoFechar" onClick={() => {props.onClickClose(); setQuantiEVal(1)}}>X</button>
 
 
           <div className="boxDetalhesPedidoEscolhido">
@@ -232,6 +238,11 @@ const addSacola = async () => {
               <div className="PedidoEscolhidoDescricao">
                 <p>{props.pedidoEscolhido.descricao}</p>
               </div>
+
+              <div className="PedidoEscolhidoPreco">
+                R$ {(props.pedidoEscolhido.preco).toFixed(2)}
+              </div>
+
               <div className="TipoDeServicos">
                 <div className="TituloDeServicos">
                   Tipo de serviço
@@ -241,15 +252,24 @@ const addSacola = async () => {
                 </div>
               </div>
 
-              <div className="PedidoEscolhidoPreco">
-                R$ {(props.pedidoEscolhido.preco).toFixed(2)}
+              <div className="AlgumComentario">
+                <div className="TituloAlgumComentario">
+                  Comentario do pedido ?
+                </div>
+                <textarea ref={comentariosFeitosNosPedidos} className='ComentarioDoPedido' maxLength={140} placeholder="Ex. tirar o tomate, ketchup á parte"></textarea>
               </div>
+
+              
               <div className="PeddoEscolhidoQntVal">
                 <div className="Qnt">
-                  <button disabled={Boolean(!props.isOpen)} className={diminuirDropOn} onClick={() => diminuir(props.pedidoEscolhido)} disabled={habilitaBotaoMenos}> - </button> {quantiEVal} <button className="Aumentar" onClick={() => aumentar(props.pedidoEscolhido)}> + </button>
+                  <button  className={diminuirDropOn} onClick={() => diminuir(props.pedidoEscolhido)} disabled={habilitaBotaoMenos}> - </button> {quantiEVal} <button className="Aumentar" onClick={() => aumentar(props.pedidoEscolhido)}> + </button>
                 </div>
                 <div className="Val">
-                  <button onClick={() => enviaProContextGeral()}><span>Adicionar</span> R$ {(pedido.preco * quantiEVal).toFixed(2)}</button>
+                  <button onClick={async () => {
+                    await enviaProContextGeral();
+                    await setQuantiEVal(1)}}>
+                      <span>Adicionar</span> R$ {(pedido.preco * quantiEVal).toFixed(2)}
+                  </button>
                 </div>
               </div>
             </div>

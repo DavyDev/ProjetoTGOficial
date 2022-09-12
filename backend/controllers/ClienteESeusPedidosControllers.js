@@ -1,6 +1,7 @@
 
 const Clientes = require('../models/Clientes')
 const ProdutosPedidos = require('..//models/produtosPedidos')
+const Pedidos = require('../models/pedidos')
 
 class ClientesESeusPedidosController {
 
@@ -206,22 +207,28 @@ class ClientesESeusPedidosController {
     }
     
     async MudandoEstagioPedido(req, res, next) {
-        console.log(req.params)
+        console.log(">>>>>>>>")
+        console.log(req.body)
+        console.log(">>>>>>>>")
+        
         let trataBody = {
-            id: req.params.id,
-            titulo: req.params.titulo,
-            descricao: req.params.descricao,
-            imagem: req.params.imagem,
-            preco: req.params.preco,
-            quantidade: req.params.quantidade,
-            pertenceColumn: req.params.pertenceColumn
+            IdCliente: req.body.IdCliente,
+            id: req.body.id,
+            nomeClienteFezPedido: req.body.nomeClienteFezPedido,
+            pertenceColumn: req.body.pertenceColumn,
+            preco: req.body.preco,
+            qntItems: req.body.qntItems
         }
-
-        await ProdutosPedidos.update(trataBody, {
+        await Pedidos.update(trataBody, {
             where: {
-              id: trataBody.id
-           }
-          });
+                id: trataBody.id
+            }
+        });
+        //const teste = await Pedidos.findByPk(trataBody.id)
+        
+        console.log("¨¨¨¨¨¨¨¨¨")
+        
+        console.log("¨¨¨¨¨¨¨¨¨¨¨¨")
 
         return res.json({
             id: trataBody.id,

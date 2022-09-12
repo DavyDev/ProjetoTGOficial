@@ -169,7 +169,7 @@
   width: 65px;
 }
 
-textarea {
+#comentariosFooter  {
   margin: 20px;
   border: none;
   outline: none;
@@ -186,7 +186,7 @@ textarea {
   color: #4B443C;
 }
 
-textarea:focus {
+#comentariosFooter:focus {
   border: 1px solid #229CFF;
 }
 

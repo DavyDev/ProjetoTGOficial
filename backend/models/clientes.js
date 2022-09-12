@@ -8,7 +8,14 @@ const Clientes = db.define('clientes', {
         allowNull: false,
         primaryKey: true
     },
-    
+    nomeUsuario:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    celularUsuario:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false
@@ -35,6 +42,6 @@ const Clientes = db.define('clientes', {
 //Clientes.sync()
 
 //Verifica se háalguma diferença na tabela, e realiza a alteração
-//Clientes.sync({ alter: true })
+//  Clientes.sync({ alter: true })
 
 module.exports = Clientes;

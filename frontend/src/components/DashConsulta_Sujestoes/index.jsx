@@ -14,7 +14,7 @@ import { Route, Switch } from 'react-router';
 
 
 function DashConsultaSujestoes() {
-
+  console.log("")
   const [toggleClick, SetToggleClick] = useState(true)
   const estadoBotao = toggleClick ? 'BotaoON' : 'BotaoOFF'
   const estadoMain = toggleClick ? 'MainON' : 'MainOFF'

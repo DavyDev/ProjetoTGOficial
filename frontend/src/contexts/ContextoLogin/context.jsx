@@ -14,6 +14,17 @@ export const ContextoLoginProvider = ({ children }) => {
     const [userAuthenticated, setUserAuthenticated] = useState(false)
     const [loggedUser, setLoggedUser] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const [testeSecao, setTesteSecao] = useState(null)
+    
+    // const lidaComAncora = (element) => {
+    //     setTesteSecao(element)
+       
+    // }
+
+    // useEffect(() => {
+    //     console.log(testeSecao)
+    // })
     
     useEffect(() => {
         const recoveredUser = localStorage.getItem("user")
@@ -33,7 +44,7 @@ export const ContextoLoginProvider = ({ children }) => {
         if(loggedUser != null){
             localStorage.setItem("user", JSON.stringify(loggedUser))
             setUserAuthenticated(loggedUser)
-            navigate.push('/')
+            navigate.push('/home')
         }
         else if (loggedUser == null){
             
@@ -61,6 +72,10 @@ export const ContextoLoginProvider = ({ children }) => {
             console.log(res.data)
             if(res.data.verificado == true && res.data.password == true) {
 
+                console.log("¬¬¬¬¬¬¬¬¬¬¬¬")
+                console.log(res.data.usuarioFounded.id)
+                console.log(res.data.usuarioFounded)
+                console.log("¬¬¬¬¬¬¬¬¬¬¬¬")
                 setLoggedUser(res.data.usuarioFounded)
                 
                 
@@ -117,7 +132,7 @@ export const ContextoLoginProvider = ({ children }) => {
 
     return (
 
-        <ContextoLogin.Provider value={{ authenticated: Boolean(userAuthenticated), userAuthenticated, loading, login, logout }}>
+        <ContextoLogin.Provider value={{ authenticated: Boolean(userAuthenticated), userAuthenticated, loading, loggedUser, login, logout,  }}>
             { children }
         </ContextoLogin.Provider>
     )

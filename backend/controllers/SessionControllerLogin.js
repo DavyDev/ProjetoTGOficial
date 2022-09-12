@@ -10,12 +10,13 @@ class SessionControllerLogin {
     
     async CreateUser(req, res) {
         console.log("teste-------")
-        console.log(req.body.email)
+        console.log(req.body)
         console.log("teste-------")
         const user ={
-            
-            email: req.body.email,
-            password: req.body.password,
+            nomeUsuario: req.body.newNameUser,
+            celularUsuario: req.body.newCelularUser,
+            email: req.body.newEmailUser,
+            password: req.body.newPasswordUser,
             token: jwt.sign( {id: "123"}, auth.secret, { expiresIn: auth.expiresIn } )
         }
 
@@ -33,7 +34,7 @@ class SessionControllerLogin {
                     return res.json({
                         erro: false,
                         mensagem: "Usuário foi cadastrado",
-                        user
+                        
                     })
                 })
                 .catch(() => {
@@ -48,7 +49,8 @@ class SessionControllerLogin {
         
 
         console.log("-------->>")
-        await console.log(user)
+        // await console.log(user)
+            console.log(user)
         console.log("-------->>")
         
         
@@ -81,11 +83,11 @@ class SessionControllerLogin {
             }
         })
 
-        console.log("---^^")
+        /*console.log("---^^")
         console.log(userLogando)
         console.log(verifyUserExists)
 
-        console.log(verifyUserExists[0].password)
+        console.log(verifyUserExists[0].password)*/
         /*bcrypt.compare(userLogando.password, verifyUserExists[0].password, (error, result) => {
             if (error){
                 return console.log("Deu errado")
@@ -116,7 +118,8 @@ class SessionControllerLogin {
                             id: verifyUserExists[0].id, 
                             email: verifyUserExists[0].email,
                             token: verifyUserExists[0].token,
-                            
+                            nomeUsuario: verifyUserExists[0].nomeUsuario,
+                            celularUsuario: verifyUserExists[0].celularUsuario,
                         }
                     })
                 }

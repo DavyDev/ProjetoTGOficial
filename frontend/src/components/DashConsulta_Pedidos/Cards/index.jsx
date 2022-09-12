@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import './style.css';
 import { Draggable } from "react-beautiful-dnd";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 /*
 export function Cards({ data, index}) {
@@ -49,44 +52,84 @@ export function Cards({ data, index}) {
 }
 
 */
+ 
+
 
 export function Task(props) {
+    const [produtosDoPedido, setProdutosDoPedido] = useState([])
+    
+   console.log('Terere aqui em baixo vv')
+    
+    
+    console.log("oi")
+    console.log(Number(props.task.id))
 
-   //console.log('Terere')
-   //console.log(props)
+    const teste = (idTask) => {
+       console.log(idTask)
+        axios.post("http://localhost:3002/listaProdutosDoPedido/cliente", {numProduto: idTask})
+            .then(resposta => setProdutosDoPedido(resposta.data))
+            .catch(e => console.log(e))
+    
+            //console.log(produtosDoPedido)
+
+    }  
+
+    useEffect(() => {
+
+        console.log(produtosDoPedido)
+    },[produtosDoPedido])
 
     return(
         <Draggable draggableId={`${props.task.id}`} index={props.index}>
             {(provided) => {
-                return(
-                    <div className="containerTasksContent"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    >
-                        <div className="taskNomeCliente">
-                           <b>Cliente:</b> <p>{props.task.nomeCliente}</p>
+                return (
+                  <div
+                    
+                    className="containerTasksContent"
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                  >
+                    <>
+                      <div className="taskNomeCliente">
+                        <b>Cliente:</b> <p>{props.task.nomeClienteFezPedido}</p>
+                      </div>
+
+                      <div className="taskTituloProduto">
+                        <b>Froma de pagamento:</b> <p>{props.task.titulo}</p>
+                      </div>
+
+                      {/*<div className="taskDescricaoProduto">
+                        <b>Descrição:</b> <p>{props.task.descricao}</p>
+                        </div>
+                      */}
+
+                      <div className="taskQntPrecoProduto">
+                        <div className="taskQntProduto">
+                          <b>Qnt Produtos:</b> <p> {props.task.qntItems}x </p>
                         </div>
 
-                        <div className="taskTituloProduto">
-                           <b>Produto:</b> <p>{props.task.titulo}</p>
+                        <div className="taskPrecoProduto">
+                          <b>Total:</b> <p> R${props.task.preco.toFixed(2)}</p>
+                        </div>
+                      </div>
+
+                      <div className="taskDetalhesDoPedido">
+                        <div className="pedidoNum">
+                            <b>Pedido N°: {props.task.id}</b>
                         </div>
 
-                        <div className="taskDescricaoProduto">
-                           <b>Descrição:</b> <p>{props.task.descricao}</p>
-                        </div>
-                        
-                        <div className="taskQntPrecoProduto">
-                           <div className="taskQntProduto">
-                           <b>Qnt Produto:</b> <p> {props.task.quantidade}x </p>
-                           </div>
+                        <button className="pedidoDetalhes" onClick={() => teste(props.task.id)}>
+                            Ver detalhes
+                        </button>
+                      </div>
+                    </>
 
-                           <div className="taskPrecoProduto">
-                                <b>Total:</b> <p> R${(props.task.preco).toFixed(2)}</p>   
-                           </div>                    
-                        </div>
-                    </div>
-                )
+                    {produtosDoPedido.map((produto, i) => {
+                      return <h1>oi</h1>;
+                    })}
+                  </div>
+                );
             }}
         </Draggable>
     )

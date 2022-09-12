@@ -7,6 +7,7 @@ import ImgInstagram from '../../assets/images/RedesSociaisFooter/instagram.png'
 
 function Footer() {
   return (
+    // <div className="DivFooter">
     <div className="DivFooter">
       <div className="footerDiv3">
         <div className="separacao1">
@@ -63,7 +64,7 @@ function Footer() {
               Deixe suas Sujestões a baixo !
             </p>
             <div className='BoxArea'>
-              <textarea name="" id="" cols="30" rows="10" placeholder="Digite aqui...">
+              <textarea name="" id="comentariosFooter" cols="30" rows="10" placeholder="Digite aqui...">
               </textarea>
             </div>
             <input className="Submit" type="submit" />

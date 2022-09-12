@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./style.css";
-//teste14
+//teste15
 import LoginBackground from "../../assets/images/LoginBackground/cenarioLogin.jpg";
 import { useEffect } from "react";
 
 import { useContext } from "react";
 import { ContextoLogin } from "../../contexts/ContextoLogin/context"
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const { authenticated, login } = useContext(ContextoLogin)
@@ -13,6 +14,8 @@ const Login = () => {
   const teste = useContext(ContextoLogin)
 
   const [user, setUser] = useState({user: '', password: ''})
+
+  const navigatesToCreateLogin = useHistory()
 
   function onChange(event) {
     const {name, value} = event.target
@@ -25,6 +28,8 @@ const Login = () => {
   console.log("--------------------------")
   console.log(teste)
 
+  
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -33,6 +38,10 @@ const Login = () => {
     console.log("submit", { email, password } )
     login(email, password)
     
+  }
+
+  const handleToCreateLogin = () => {
+    navigatesToCreateLogin.push('/register')
   }
   //Teste
 
@@ -79,7 +88,7 @@ const Login = () => {
                 </div>
 
                 <div className="CriarConta">
-                        <a href="#">Criar nova conta</a>
+                        <a onClick={() => handleToCreateLogin()}>Criar nova conta</a>
                 </div>
 
               </form>

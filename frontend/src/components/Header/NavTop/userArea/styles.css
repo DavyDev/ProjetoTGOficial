@@ -1,0 +1,85 @@
+  .userPerfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .userSpaces{
+    height: 40px;
+  }
+  
+  .user{
+    width: 20px;
+    transform: rotate(180deg);
+  
+  }  
+  
+  .userON{
+    width: 20px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .user {
+    width: 20px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .menuUser-Drop-OFF{
+    display: none;
+  }
+  
+  .menuUser-Drop-ON{
+    margin-top: 40px;
+    border-top: 5px solid #F94747;
+    position: absolute;
+    left: 0px;
+    top: 81%;
+    background-color: #F7F7F7;
+    border-radius: 0px 0px 6px 6px;
+    width: 200px;
+    font-family: 'PoppinsMedium';
+  }
+  
+  .saudacoesUser{
+    padding: 10px 0px 20px 15px;
+    /* word-break:break-all; */
+    /* white-space:initial; */
+    /* text-overflow: ellipsis; */
+  }
+  
+  .menuUser-Drop-ON  li{
+    padding: 10px 0px 10px 10px;
+  }
+  
+  .menuUser-Drop-ON  li {
+    display: flex;
+  }
+
+  .Li_Coloridos{
+    color: #717171;
+    line-height: 30px;
+  }
+
+  .Li_Coloridos:hover{
+    cursor: pointer;
+    color: #F94747;
+  }
+
+  .Li_Coloridos img{
+    height: 30px;
+    padding-right: 10px;
+  }
+
+
+  .menuUser-Drop-ON a:hover{
+    color: #F94747;
+  }
+
+
+  
+  
+
+  
+  

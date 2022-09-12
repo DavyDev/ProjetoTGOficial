@@ -5,10 +5,12 @@ const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
+const PedidosControllers = require("../../controllers/PedidosControllers")
 const ProdutosController = require("../../controllers/ProdutosControllers")
 const ClientesESeusPedidosController = require('../../controllers/ClienteESeusPedidosControllers')
 const ConsultaPedidosSolicitados = require('../../controllers/ConsultaPedidosSolicitadosController')
 const TesteLoginUser = require('../../controllers/SessionControllerLogin')
+const ItensControllers = require('../../controllers/ItensControllers')
 //const CadastrarProdutos = require('../../models/CadastrarProdutos')
 //Linha que irá pegar e fornecer os dados de cada pedido 
 const dadosFornecidos = require('../../data/pedidos')
@@ -17,10 +19,15 @@ const dadosFornecidos = require('../../data/pedidos')
 const middlewareA = require('../../middlewares/middewareA')
 const { response } = require('../../config/configApplication')
 const { urlencoded } = require('body-parser')
+const ClienteESeusDadosEInformacoes = require('../../controllers/ClienteESeusDadosEInformacoes')
 
 
 
 router.get('/produtos/', ProdutosController.ListProdutos)
+router.post('/produtos', urlencodedParser, ProdutosController.CreateProduto)
+router.put('/produtos/:id', urlencodedParser, ProdutosController.UpdateProdutos)
+router.delete('/produtos/:id', urlencodedParser, ProdutosController.DeleteProdutos)
+
 
 router.get('/pedidosSolicitados', ConsultaPedidosSolicitados.ConsultaTodosOsPedidosSolicitados)
 
@@ -30,12 +37,17 @@ router.get('/produtos/:cardapio', ProdutosController.ListProdutos)
 
 router.get('/pedidosFeitos/cliente/:codigoCliente', ClientesESeusPedidosController.NomeClienteDoPedido)
 router.post('/pedidosFeitos/cliente/:emailCliente/:passwordCliente/:titulo/:descricao/:preco/:quantidade', ClientesESeusPedidosController.CadastrandoPedidoECliente)
+
+// Esta rota é responsavelpor permitir o acesso de usuários (Tela login)
 router.post('/login', urlencodedParser, TesteLoginUser.ValidTheUser)
-//router.post('/login', urlencodedParser, TesteLoginUser.CreateUser)
+// Esta rota é responsavelpor criar a conta de usuários para login (Tela register (criação de conta))
+router.post('/registerNewAcount', urlencodedParser, TesteLoginUser.CreateUser)
+
+
 // router.get('/login', LoginWithToken.ListToken)
 //router.post('/login/create', LoginWithToken.CreateUser)
 router.get('/pedidosFeitos/cliente/anonimousCliente/:codClienteAnonimo', ClientesESeusPedidosController.VerificandoClienteAnonimo)
-router.put('/pedidosFeitos/cliente/:id/:titulo/:descricao/:imagem/:preco/:quantidade/:pertenceColumn', urlencodedParser, ClientesESeusPedidosController.MudandoEstagioPedido)
+router.put('/pedidosFeitos/cliente', urlencodedParser, ClientesESeusPedidosController.MudandoEstagioPedido)
 //router.post('/teste/:nomeCliente/:titulo/:descricao/:preco/:quantide', ClientesESeusPedidosController.JuntandoPedidosaoCliente)
 
             /*id: 6,
@@ -54,11 +66,39 @@ router.put('/pedidosFeitos/cliente/:id/:titulo/:descricao/:imagem/:preco/:quanti
 } )*/
 
 
-router.post('/produtos', urlencodedParser, ProdutosController.CreateProduto)
-
-router.put('/produtos/:id', urlencodedParser, ProdutosController.UpdateProdutos)
-router.delete('/produtos/:id', urlencodedParser, ProdutosController.DeleteProdutos)
 
 
+//--------------------------------------------------------------------------------------
+
+router.get('/listaPedidosFeitos/cliente', PedidosControllers.ListaTodosPedidos)
+router.post('/listaProdutosDoPedido/cliente', PedidosControllers.ListaProdutosDoPedido)
+
+//0 - O cliente esta logado, portanto ja existe no banco, bastando informar na criação do pedido o seu IdCliente que sera a chave estrangeira dentro do pedido
+
+//1 - O cliente fez o pedido (Só que pedido não existe no banco antes de ser criado) então é feitoa criação dele
+router.post('/pedidosFeitos2/cliente', PedidosControllers.RegistraPedidos)
+
+//2 - Os produtos são cadastrados e ligados ao cliente Pedi(1)<-->Prod(n)
+router.post('/produtosNosPedidos/cliente', PedidosControllers.RegistraProdutosDosPedidos)
+
+//-Itens dos Produtos-------------------------------------------------------------------------------------
+
+router.get('/listaItensDosProdutos', urlencodedParser, ItensControllers.ListaItens)
+router.post('/registraItensDosProdutos', urlencodedParser, ItensControllers.RegistraItens)
+
+//-Parte relacionada a "Pedidos" e "Meus Dados" quando o cliente esta logado-------------------------------------------------------------------------------------
+
+    //Quando o clinte acessa a area de pedidos dele   
+    router.get('/listagemDosMeusPedidosFeitos/:idDoCliente', ConsultaPedidosSolicitados.ConsultaPedidosSolicitadosPeloCliente)
+
+        // * Quando o clinte acessa a area de pedidos dele e precisamos mostrar o primeiro produto de cada pedido dele
+        router.get('/listagemDosprodutosDosPedidosFeitos/:idDoPedido', ConsultaPedidosSolicitados.ConsultaProdutosDosPedidosSolicitadosPeloCliente)
+        
+        // * Quando o clinte acessa a area de pedidos dele e clica em umpedido para vero detalhe das compras
+        router.get('/detalhesDoPedido/:numPedido', ConsultaPedidosSolicitados.verDetalhesDoPedidoFeitoPeloCliente)
+
+    //Quando o cliente deseja atualizar as informaçõesdo tipo (Nome e/ou Número)
+    router.put('/atualizandoNomeCelularDoUser', urlencodedParser, ClienteESeusDadosEInformacoes.Atualizandodados_NomeCelular)
+    
 
 module.exports = router

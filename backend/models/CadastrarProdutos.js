@@ -33,6 +33,10 @@ const CadastrarProdutos = db.define('produtosCadastrados', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    dadosParaEstoque: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
     /*cardapio: {
         type: Sequelize.STRING,
         allowNull: false

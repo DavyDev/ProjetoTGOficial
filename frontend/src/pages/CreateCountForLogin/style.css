@@ -1,0 +1,165 @@
+@font-face {
+    font-family: "Righteous";
+    src: url('../../assets/fonts/Cardapio_Righteous/Righteous-Regular.ttf');
+}
+@font-face {
+    font-family: "PoppinsMedium";
+    src: url('../../assets/fonts/TopoDicas/Poppins-Medium.ttf');
+}
+
+.ContainerCreateLogin {
+    background-image: url("../../assets/images/LoginBackground/cenarioLogin.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+}
+
+
+.ImagemBackgroundLogin {
+    
+}
+
+.VidroBackgroundEffect{
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Boxformulario{
+    width: 400px;
+    height: 450px;
+    background-color: #fff;
+    display: block;
+}
+
+.ContainerEspacamento {
+    
+    margin: 20px;
+}
+
+.diviLogoCreateLogin { 
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr 0.05fr;  
+ 
+}
+
+.LogoCreateLogin{
+    font-family: "Righteous";
+    color: #717171;
+    font-size: 30px;
+}
+.fecharCreateLogin{
+    font-family: "Righteous";
+    color: #7171717f;
+    font-size: 16px;
+    line-height: 37.33px;
+}
+
+.fecharCreateLogin:hover{
+    color: #717171a2;
+    cursor: pointer;
+}
+
+.Lembrar_Recuperar{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 0px 30px 0px;
+}
+
+.LabelEmail {
+    color: #717171;
+    font-family: "PoppinsMedium";
+    font-size: 20px;
+}
+
+#email {
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 14px 0px 10px 14px;
+    border-radius: 3.5px;
+    outline: none;
+    border: 1px solid #717171;
+    font-size: 16px;
+}
+
+
+.LabelSenha {
+    color: #717171;
+    font-family: "PoppinsMedium";
+    font-size: 20px;
+}
+
+#senha {
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 14px 0px 10px 14px;
+    border-radius: 3.5px;
+    outline: none;
+    border: 1px solid #717171;
+    font-size: 16px;
+}
+
+.lembrar span {
+    font-family: "PoppinsMedium";
+    color: #717171;
+    font-size: 14px;
+}
+
+.EsqueceuSenha a {
+    font-family: "PoppinsMedium";
+    color: #E8AE68;
+    font-size: 14px;
+}
+
+.BotaoEntrar  button{
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    padding: 14px;
+    border-radius: 4px;
+    background-color: #E8AE68;
+    outline: none;
+    border: none;
+
+    font-family: "PoppinsMedium";
+    color: #fff;
+    font-size: 16px;
+}
+
+.CriarConta {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.CriarConta a{
+    font-family: "PoppinsMedium";
+    color: #717171;
+    font-size: 14px;
+}
+
+.nomeAndTelefone{
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;    
+    gap: 10px
+}
+
+#celular {
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 14px 0px 10px 14px;
+    border-radius: 3.5px;
+    outline: none;
+    border: 1px solid #717171;
+    font-size: 16px;
+}

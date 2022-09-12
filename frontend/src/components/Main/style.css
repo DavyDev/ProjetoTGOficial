@@ -1,0 +1,10 @@
+.mainSpace{
+    position: relative;
+    top: -65px;
+}
+
+.DivMainProdutos{
+    width: 70%;
+    margin: 200px auto 20px auto;
+    bottom: 30%;
+}

@@ -1,23 +1,28 @@
 import './styles.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from '../../../assets/images/LogoHeader/LogoHeader.png';
+
+
 import SacolaTop from './SacolaTop';
+import UserArea from './userArea';
 
 import DropDownButton from './DropDownButton';
 import Search from './Search';
 import { ContextoSacola } from '../../../contexts/ContextoSacola/context';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { ContextoLogin } from "../../../contexts/ContextoLogin/context"
 
 function NavTop() {
+  const nomeDoUserLogado = JSON.parse(localStorage.getItem('user')) 
+
   const usandoContexto = useContext(ContextoSacola)
-  const { authenticated, logout } = useContext(ContextoLogin)
   const { numeroTooltipo } = usandoContexto
 
-  const handleLogout = () => {
-    logout();
-  }
+  const [setaIsOn, setSetaIsOn] = useState(false);
+  const setaON = setaIsOn ? 'userON' : 'user';
+  const ClasDropMenu = setaIsOn ? 'menuUser-Drop-ON' : 'menuUser-Drop-OFF';
+
+  
 
 
   useEffect(() => {
@@ -40,8 +45,7 @@ function NavTop() {
         <SacolaTop/>
       </div>
       <div id="userSpace">
-        <p>{String(authenticated)}</p>
-        <button onClick={handleLogout}>Logout</button>
+        <UserArea/>
       </div>
     </div>
   );

@@ -33,6 +33,7 @@ function Edicoes() {
   const [valuesInputs, SetValuesInputs] = useState(initialValuesFormUpdate)
   console.log(valuesInputs)
   const [lidaComPedidosCadastrar, SetLidaComPedidosCadastrar] = useState([])
+  const [guardaSecaoDoCardapio, setGuardaSecaoDoCardapio] = useState("")
   const estadoBotao = toggleClick ? 'BotaoON' : 'BotaoOFF'
   const estadoMain = toggleClick ? 'MainON' : 'MainOFF'
 
@@ -104,7 +105,8 @@ function Edicoes() {
   }, [])
 
   const identifica = (event) => {
-    console.log(event.target.id)
+  console.log(event.target.id)
+    setGuardaSecaoDoCardapio(event.target.id)
 
     switch (event.target.id) {
       case "tapiocacrepioca":
@@ -166,7 +168,7 @@ function Edicoes() {
     await axios.delete(`http://localhost:3002/produtos/${valorId}`)
         .then(response => console.log(response.data))
         
-    await fetch(`http://localhost:3002/produtos`)
+    await fetch(`http://localhost:3002/produtos/${guardaSecaoDoCardapio}`)
             .then(response => response.json())
             .then(resposta => SetLidaComPedidosCadastrar(resposta))
   }

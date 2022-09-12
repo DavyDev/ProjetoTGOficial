@@ -30,11 +30,11 @@ export function Board(params) {
 */
 
 export function BoardTeste(params) {
-    const [pedidis, setpedidis] = useState([0])
+    const [pedidis, setpedidis] = useState([])
 
     useEffect(() => {
         console.log("O componente foi montado")
-         fetch('http://localhost:3002/pedidosSolicitados')
+         fetch('http://localhost:3002/listaPedidosFeitos/cliente')
         .then(response => response.json())
         .then(resposta => setpedidis(resposta))
 
@@ -131,11 +131,21 @@ export function BoardTeste(params) {
         //A partir daqui da para fazer a alteração com o Axios
         console.log(reorderItem)
 
-        axios.put(`http://localhost:3002/pedidosFeitos/cliente/${reorderItem.id}/${reorderItem.titulo}/${reorderItem.descricao}/${reorderItem.imagem}/${reorderItem.preco}/${reorderItem.quantidade}/${reorderItem.pertenceColumn}`)
+        axios.put(`http://localhost:3002/pedidosFeitos/cliente`,{
+            IdCliente: Number(reorderItem.IdCliente),
+            id: Number(reorderItem.id),
+            nomeClienteFezPedido: reorderItem.nomeClienteFezPedido,
+            pertenceColumn: reorderItem.pertenceColumn,
+            preco: Number(reorderItem.preco),
+            qntItems: Number(reorderItem.qntItems),
+
+        })
             //.then((resposta) => resposta.json())
               .then((resposta) => console.log(resposta.data))
               .catch(() => console.log("Deu Errado"))
 
+          console.log("TUTUTUTUTUTUTUTUTU") 
+          console.log(reorderItem)
           console.log("------------------------")  
           console.log(finishDestination)  
 
@@ -153,9 +163,9 @@ export function BoardTeste(params) {
             case "preparando":
                 console.log("Foi pra preparando")
                 console.log(reorderItem)
-                console.log(cliente.emailCliente)
+                //console.log(cliente.emailCliente)
                 axios.post(
-                    'https://api.z-api.io/instances/3A7009DDF8E170689DA12638B493A101/token/43A4B80B3003AB3E77DAAF52/send-messages',
+                    'https://api.z-api.io/instances/3A81587077E9B01C58110A656FDF5A1E/token/6E7CB8F4175058C55F52CAEE/send-messages',
                     {
                     "phone": `${reorderItem.passwordCliente}`,
                     "message": `Prontinho seu pedido ${reorderItem.emailCliente} já esta sendo preparado`
@@ -172,7 +182,7 @@ export function BoardTeste(params) {
             case "pronto":
                 console.log("Esta pronto")
                 axios.post(
-                    'https://api.z-api.io/instances/3A7009DDF8E170689DA12638B493A101/token/43A4B80B3003AB3E77DAAF52/send-messages',
+                    'https://api.z-api.io/instances/3A81587077E9B01C58110A656FDF5A1E/token/6E7CB8F4175058C55F52CAEE/send-messages',
                     {
                     "phone": `${reorderItem.passwordCliente}`,
                     "message": `Obaaaaa! 😋 ${reorderItem.emailCliente} seu pedido ja esta pronto basta retirar no estabelecimento Deck Café.`
@@ -273,7 +283,7 @@ export function BoardTeste(params) {
                     const column = tarefas[1].columns[position]
                     //console.log(column)
                     const tasks = tarefas[0].tasks.map((tasksIds, positionId) => tarefas[0].tasks[positionId])
-                    //console.log(tarefas[0].tasks)
+                    console.log(tarefas[0].tasks)
                     console.log("-----")
                     return <Column key={column} column={column} tasks={tasks}/>         
                 })}

@@ -1,0 +1,88 @@
+.acessoAosMeusDados{
+    background-color: #E5E5E5;
+    height: 570px;
+    padding-top: 60px;
+}
+
+.BoxMeusDados{
+    border: rgb(255, 255, 255) 1px solid;
+    border-radius: 12px;
+    background-color: #fff;
+    width: 430px;
+    margin: 0px auto 100px auto;
+    padding-bottom: 20px;
+}
+
+.BoxMeusDados h1{
+    
+
+
+    font-family: 'PoppinsMedium';
+    color: #353536;
+    text-align: center;
+    margin: 25px 0px 50px 0px;
+    
+    
+}
+
+.informacoesPessoais{
+    /* border: 1px solid red; */
+    margin: 0px 20px 0px 20px;
+    cursor: pointer;
+}
+.informacoesDeAcesso{
+    /* border: 1px solid red; */
+    margin: 0px 20px 0px 20px;
+    cursor: pointer;
+}
+
+.informacoesPessoaisComponentes{
+    display: flex;
+    justify-content: space-between;
+}
+.informacoesDeAcessoComponentes{
+    display: flex;
+    justify-content: space-between;
+}
+
+.informacoesPessoais{
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D9D9D9;
+}
+.informacoesDeAcesso{
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+
+
+.informacoesPessoais p{
+    font-family: 'PoppinsMedium';
+    color: #000000;
+}
+.informacoesDeAcesso p{
+    font-family: 'PoppinsMedium';
+    color: #000000;
+}
+
+.informacoesPessoaisComponentes{
+    font-family: 'PoppinsMedium';
+    color: #5c5c5c;
+}
+.informacoesDeAcessoComponentes{
+    font-family: 'PoppinsMedium';
+    color: #5c5c5c;
+}
+
+.setaLateralInformacoesPessoais{
+    color: #F94747;
+    font-weight: bolder;
+}
+
+.setaLateralInformacoesDeAcesso{
+    color: #F94747;
+    font-weight: bolder;
+}
+

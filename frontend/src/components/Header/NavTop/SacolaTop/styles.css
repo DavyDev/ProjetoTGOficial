@@ -12,7 +12,7 @@
 }
 
 #divSacola {
-  cursor: pointer;
+  
 }
 
 #divSacola img {
@@ -35,6 +35,8 @@
   right: 48px;
 
   border-radius: 0px 0px 24px 24px;
+
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.204);
 
 }
 
@@ -83,7 +85,12 @@
   font-weight: bold;
 }
 
-.PreçoPedidosSacolas{
+.PrecoPedidosSacolas{
+  font-family: "Poppins-Medium";
+  color: #717171;
+}
+
+.PrecoTotalPedidosSacolas{
   font-family: "Poppins-Medium";
   color: #50A773;
 }
@@ -93,14 +100,17 @@
 }
 
 .ajustaDadosPedidos{
-  margin: 0px 30px 0px 30px;
+  padding: 0px 0px 5px 0px;
+  margin: 0px 30px 15px 30px;
+  border-bottom: 1px solid hsla(0, 0%, 34%, 0.512);
 }
 
-.cadaPedidoDaSacola hr{
-  border-top: 1px solid rgba(63, 62, 62, 0.1);
-  border-bottom: 1px solid rgba(63, 62, 62, 0.1);
-  margin:0px 30px 0px 0px;
-}
+/* .cadaPedidoDaSacola{
+  border-bottom: 1px solid red;
+  margin: 0px 0px 10px 0px;
+} */
+
+
 
 .pedidoTitulo {
   color: #3f3e3e;
@@ -118,12 +128,9 @@
 
 }
 
-.gridEditarEPreco div{
-
-}
-
 .AreaSacola{
   position: relative;
+  cursor: pointer;
 }
 
 .ToolTipSacola{
@@ -160,14 +167,16 @@
 
 }
 
-.hrDivisa{
+/* .hrDivisa{
   margin: 2px 7% 0px 0px;
-  border: 1px solid #71717134 ;
-}
+  border: 1px solid #1c9b1534 ;
+} */
+
+
 
 #removerPedidoSacola {
   font-family: "SulphurPoint";
-  color: #717171c2;
+  color: #fff;
   font-weight: 400;
   font-size: 17px;
   letter-spacing: 1px;
@@ -303,4 +312,20 @@
   cursor: pointer;
   background-color: #c91f1f;
   color: #fff;
+}
+
+.ObsComentarioNoProduto{
+ 
+  font-family: "SulphurPoint";
+  color: #717171;
+  margin-bottom: 10px;
+  overflow-wrap: break-word
+}
+
+.lixeiraProdutos{
+  cursor: pointer;
+}
+
+.lixeira{
+  height: 32px;
 }

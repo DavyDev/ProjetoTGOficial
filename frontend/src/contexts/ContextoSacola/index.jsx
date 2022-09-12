@@ -18,7 +18,7 @@ export const ContextoSacolaProvider = ({children}) => {
   const [remocaoState, remocaoDispatch] = useReducer(reducer, -1)
   const [contador, setContador] = useState(0)
   const [finalizaPedidosSacola, setFinalizaPedidosSacolaDispatch] = useReducer(reducer, false)
-
+  console.log(pedidoState)
   let zinha = 0
 
   if(finalizaPedidosSacola == true){
@@ -37,6 +37,8 @@ export const ContextoSacolaProvider = ({children}) => {
       armazenaOsPedidos = []
     }
     else{
+      console.log("++++++000000000000")
+      console.log(pedidoState)
       armazenaOsPedidos.push(pedidoState)
       numeroTooltipo = (numeroTooltipo + 1)
       setContador(armazenaOsPedidos.length)

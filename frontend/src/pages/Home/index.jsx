@@ -1,4 +1,5 @@
 import './style.css';
+import { Route, Switch } from 'react-router';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Main from "../../components/Main";
@@ -6,6 +7,13 @@ import { ContextoSacolaProvider } from '../../contexts/ContextoSacola';
 import { useState } from 'react';
 
 import axios from 'axios'
+import Home_Cliente from '../../components/Home_Cliente';
+import Home_ClientePedidos from '../../components/Home_ClientePedidos';
+import Home_ClienteMeusDados from '../../components/Home_ClienteMeusDados';
+import Home_InfoPessoais from '../../components/Home_InfoPessoais';
+import Home_InfoDeAcesso from '../../components/Home_InfoDeAcesso';
+import DashConsultaPedidos from '../../components/DashConsulta_Pedidos';
+import Home_DetalhesDoPedido from '../../components/Home_DetalhesDoPedido';
 
 
   //0 - Verifica se é a primeira vez da pesoa ao verificar se o LocalStorage tem inserido qualquer Cliente_Anonimo base ou Cliente_Anonimo de verdade
@@ -93,19 +101,29 @@ import axios from 'axios'
     <>
       <div className="DivHome">
         
-        <ContextoSacolaProvider>
-          <header className="header">
-            <Header />
+        {/* <ContextoSacolaProvider>
+          <header className="headerHome">
+            <Header/>
           </header>
 
           <main className="DivMain">
               <Main />
+              
           </main>
         </ContextoSacolaProvider>
 
         <footer className="DivFooter">
           <Footer />
-        </footer>
+        </footer> */}
+
+        <Switch>
+          <Route path='/home' exact component={Home_Cliente} />
+          <Route path='/home/clientePedidos' exact component={Home_ClientePedidos} />
+          <Route path='/home/clienteMeusDados' exact component={Home_ClienteMeusDados} />
+          <Route path='/home/clientePedidos/pedido/:detalhesDoPedido' exact component={Home_DetalhesDoPedido} />
+          <Route path='/home/clienteMeusDados/infoPessoais' exact component={Home_InfoPessoais} />
+          <Route path='/home/clienteMeusDados/infoDeAcesso' exact component={Home_InfoDeAcesso} />
+        </Switch>
       </div>
     </>
     

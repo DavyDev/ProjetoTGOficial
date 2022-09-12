@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: url('../../../../src/assets/fonts/TopoDicas/Poppins-Medium.ttf');
+}
+
+
 .NavTop{
 
   width: 70%;
@@ -11,6 +17,7 @@
 
 
   gap: 30px;
+  /* border: 1px solid red; */
 }
 
 
@@ -28,27 +35,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid blueviolet; */
  }
 
  .CardapioHeader img{
    width: 45px;
+   
  }
 
  .SearchHeader{
   display: flex;
   align-items: center;
+  /* border: 1px solid blueviolet; */
  }
  #SacolaHeader{
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-left: 25px;
-
+  /* border: 1px solid blueviolet; */
  }
-#userSpace{
+
+ #userSpace{
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  
 }
 
 

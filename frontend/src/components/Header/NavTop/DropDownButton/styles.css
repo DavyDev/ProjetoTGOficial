@@ -76,7 +76,7 @@ text-align: center;
 }
 
 
-ul{
+ul li{
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -98,6 +98,18 @@ ul{
   left: 0px;
   background-color: #F7F7F7;
   border-radius: 0px 0px 6px 6px;
+}
+
+.menu-Drop-ON li a{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  color: #717171;
+}
+
+.menu-Drop-ON li a{
+  animation-delay:5s;
 }
 
 .menu-Drop-OFF {

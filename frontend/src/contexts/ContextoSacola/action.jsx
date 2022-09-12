@@ -1,7 +1,9 @@
 import * as types from './action-types'
 
 export const enviaPara_VariavelGlobal = (dispatch, pedidoRecebido) => {
-  //console.log("Passando pela action enviaParaSacola")
+  console.log("Passando pela action enviaParaSacola")
+  // console.log(dispatch)
+  // console.log(pedidoRecebido)
 
 
 
