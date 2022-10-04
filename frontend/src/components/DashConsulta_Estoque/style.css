@@ -1,4 +1,222 @@
+@font-face {
+  font-family: 'PoppinsMedium';
+  src: url("../../assets/fonts/TopoDicas/Poppins-Medium.ttf");
+}
+
 #pintaDeAzul{
   background-color: #03a9f4;
+}
 
+.divConsultaEstoque {
+  width: calc(100% - 140px);
+  margin: 0px auto;
+  /* background-color: #03a9f4; */
+  background-color: #E5E5E5;
+  margin-top: 50px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.divListagemDeItensDoEstoque{
+  width: calc(100% - 140px);
+  height: 430px;
+  background-color: #E5E5E5;
+  margin: 50px auto 0px auto;
+  /* margin-top: 50px; */
+  border-radius: 5px 5px 5px 5px;
+  padding: 0px 30px;
+}
+
+.divConsultaEstoque p{
+  padding: 30px 32px 15px 0px;
+  font-family: Tahoma, Verdana, Geneva, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #464646;
+  margin-left: 30px;
+}
+
+.divListagemDeItensDoEstoque p{
+  padding: 30px 32px 15px 0px;
+  font-family: Tahoma, Verdana, Geneva, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #464646;
+}
+
+.item_Quantidade{
+  /* background-color: brown; */
+  display: flex;
+  /* grid-template-columns: 1fr 1fr 1.5fr; */
+  padding-bottom: 20px;
+}
+.item_Quantidade input{
+  margin-top: 10px;
+  border-radius: 2px;
+  border: 1px solid #464646;
+  padding: 5px 10px;
+  outline: none
+}
+.item_Quantidade label{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
+.adicionaItemEstoque{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+.adicionaItemEstoque button{
+ 
+  
+  padding: 5px 15px;
+  border-radius: 3px;
+  border: 1px solid #000;
+}
+.adicionaItemEstoque button:hover{
+  padding: 5px 15px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  background-color: #dbdbdb;
+  cursor: pointer;
+}
+
+.tabelaDeListagenDosItens{
+  width: 100%;
+  height: 330px;
+  /* background-color: #03a9f4; */
+  overflow-y: scroll;
+}
+
+.tabelaDeListagenDosItens table{
+  width: 100%;
+  border-collapse: collapse;
+  
+
+}
+
+.tabelaDeListagenDosItens tbody tr:nth-child(odd) {
+  background: #d6d8db;
+}
+.tabelaDeListagenDosItens tbody tr:nth-child(even) {
+  
+  background: #fdfdfe;
+}
+
+.tabelaDeListagenDosItens td, .tabelaDeListagenDosItens th{
+    padding:  5px 10px;
+    text-align: center;
+    border: 1px solid rgb(162, 162, 162);
+}
+
+.tabelaDeListagenDosItens thead tr th{
+  background-color: #fff;
+  font-family: 'PoppinsMedium';
+  font-size: 14px; 
+  border-top: none;
+}
+.tabelaDeListagenDosItens tbody tr{
+  font-family: 'PoppinsMedium';
+  font-size: 13.5px; 
+}
+
+.tabelaDeListagenDosItens button{
+  padding: 2px 4px;
+  font-family: 'PoppinsMedium';
+  font-size: 13px;
+  border: none;
+  border-radius: 3px;
+}
+
+.tabelaDeListagenDosItens button:nth-child(1){
+  background-color: #ffeeba;
+  margin-right: 10px;
+}
+
+.tabelaDeListagenDosItens button:nth-child(1):hover{
+  cursor: pointer;
+  background-color: #f9d978;
+}
+.tabelaDeListagenDosItens button:nth-child(2){
+  margin-right: 10px;
+  background-color: #f5c6cb;
+}
+.tabelaDeListagenDosItens button:nth-child(2):hover{
+  cursor: pointer;
+  background-color: #f58f99;
+}
+.divEditandoItemDoEstoque{
+  display: flex;
+  /* background-color: #03a9f4; */
+}
+
+.inputsNotAlloweds{
+  cursor:not-allowed;
+  
+}
+
+.divEditandoItemDoEstoque div{
+  margin: 0px 20px 0px 0px;
+}
+
+
+.divEditandoItemDoEstoque input{
+  margin-top: 10px;
+  border-radius: 2px;
+  border: 1px solid #464646;
+  padding: 5px 10px;
+  outline: none
+}
+.divEditandoItemDoEstoque label{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
+.divEditandoItemDoEstoque{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+.divEditandoItemDoEstoque button{
+ 
+  
+  padding: 5px 15px;
+  border-radius: 3px;
+  border: 1px solid #000;
+}
+.adicionaItemEstoque button:hover{
+  padding: 5px 15px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  background-color: #dbdbdb;
+  cursor: pointer;
+}
+
+.botoesAtualizaEVolta button{
+  margin: 0px 10px 0px 0px;
+  width: 170px;
+}
+.botoesAtualizaEVolta button:nth-child(1){
+  /* background-color: #03a9f4; */
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+}
+
+.botoesAtualizaEVolta button:nth-child(1):hover{
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  background-color: #E5E5E5;
+  cursor: pointer;
+}
+
+.botoesAtualizaEVolta button:nth-child(2){
+  background-color: #A6A5A5;
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  
+}
+
+.botoesAtualizaEVolta button:nth-child(2):hover{
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  background-color: #7d7d7d; 
+  cursor: pointer;
 }

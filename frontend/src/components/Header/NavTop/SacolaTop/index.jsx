@@ -8,6 +8,7 @@ import { ContextoSacola } from '../../../../contexts/ContextoSacola/context';
 import { EnviaPedidosFinalizadosDa_Sacola, removeDa_Sacola } from '../../../../contexts/ContextoSacola/action';
 
 import InputMask from 'react-input-mask'
+import { useRef } from 'react';
 
 //import { ContextoLogin } from "../../../../contexts/ContextoLogin/context"
 
@@ -23,6 +24,8 @@ function SacolaTop(props) {
   const [teste, setTeste] = useState("Variavel teste")
   const [nomeCliente, setNomeCliente] = useState('')
   const [numeroCliente, setNumeroCliente] = useState("")
+
+  const refDoSelectDePagamento = useRef(null)
   //const { loggedUser } = useContext(ContextoLogin)
 
 
@@ -80,7 +83,7 @@ function SacolaTop(props) {
       if(pedidosQueSeraoEnviados.length <= 0){
         return
       }
-      else if(pedidosQueSeraoEnviados.length >= 1){
+      else if(pedidosQueSeraoEnviados.length >= 1 && refDoSelectDePagamento.current.value != "#"){
 
         console.log(pedidosQueSeraoEnviados)
         console.log("[[[[[[[[[[[[[[[[")
@@ -89,7 +92,8 @@ function SacolaTop(props) {
             idDoCliente: idDoClienteDoPedido.id,
             preco: armazenaOsPrecos,
             nomeUsuario: idDoClienteDoPedido.nomeUsuario,
-            qntItems: contador
+            qntItems: contador,
+            formaDePagamento: refDoSelectDePagamento.current.value
           })
           //.then((resposta) => resposta.json())
           .then((resposta) => {
@@ -123,46 +127,54 @@ function SacolaTop(props) {
           .catch(() => console.log("Deu Errado"));
 
         console.log("------------------------");  
-
-          //este é o que estava sendo usado vvvvv
+        alert("Colocar mensagem de sucesso do pedido feito");  
+        
+        //este é o que estava sendo usado vvvvv
         /*for(let i = 0; i < pedidosQueSeraoEnviados.length; i++){
           console.log("oi*******")
           console.log(pedidosQueSeraoEnviados)
           console.log(nomeCliente)
           console.log(numeroCliente)
           console.log("oi*******")
-
+          
           axios.post(`http://localhost:3002/teste/${nomeCliente}/${pedidosQueSeraoEnviados[i].titulo}/${pedidosQueSeraoEnviados[i].descricao}/${pedidosQueSeraoEnviados[i].preco}/${pedidosQueSeraoEnviados[i].quantidade}`)
           //.then((resposta) => resposta.json())
-            .then((resposta) => console.log(resposta.data))
-            .catch(() => console.log("Deu Errado"))
-            //oficial vvvvvv
-            //axios.post(`http://localhost:3002/pedidosFeitos/cliente/${nomeCliente}/${numeroCliente}/${pedidosQueSeraoEnviados[i].titulo}/${pedidosQueSeraoEnviados[i].descricao}/${pedidosQueSeraoEnviados[i].preco}/${pedidosQueSeraoEnviados[i].quantidade}`)
-            
-            //Testes vvvvvv
-            
-
+          .then((resposta) => console.log(resposta.data))
+          .catch(() => console.log("Deu Errado"))
+          //oficial vvvvvv
+          //axios.post(`http://localhost:3002/pedidosFeitos/cliente/${nomeCliente}/${numeroCliente}/${pedidosQueSeraoEnviados[i].titulo}/${pedidosQueSeraoEnviados[i].descricao}/${pedidosQueSeraoEnviados[i].preco}/${pedidosQueSeraoEnviados[i].quantidade}`)
+          
+          //Testes vvvvvv
+          
+          
           
           //res.data.form; // { hello: 'world' }
           //res.data.headers['Content-Type'];
         }*/
-      }
-    
+          EnviaPedidosFinalizadosDa_Sacola(setFinalizaPedidosSacolaDispatch, false)
+        }
+        else{
 
-   EnviaPedidosFinalizadosDa_Sacola(setFinalizaPedidosSacolaDispatch, false)
- }
+          alert("Informar que uma forma de pagemento deve ser selecionada");  
+        }
+          
+        
+      
 
- const handleChangeName = (event) => {
-   setNomeCliente((event.target.value))
-   
- } 
- {/* Você parou aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii*/}
+    }
+
+    const handleChangeName = (event) => {
+      setNomeCliente((event.target.value))
+      
+    } 
+    {/* Você parou aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii*/}
  const handleChangeNumero = (event) => {
   setNumeroCliente('55' + event.replace(/[^0-9]/g, ''))
  } 
 
  console.log(nomeCliente)
  console.log(numeroCliente)
+//  console.log(refDoSelectDePagamento.current.value); 
 
   return (
     <div id="divSacola" >
@@ -199,7 +211,7 @@ function SacolaTop(props) {
                     <div className='lixeiraProdutos'>
                       <img  className='lixeira' src={Lixeira} onClick={() => pegaPedidosRemovidos(pedido.codRandon)}/>
                     </div>
-                    <div className='PrecoPedidosSacolas'>{pedido.preco}</div>
+                    <div className='PrecoPedidosSacolas'>R$ {pedido.preco}</div>
                   </div>
                 </div>
               </div>
@@ -210,15 +222,24 @@ function SacolaTop(props) {
 
         <div className="TotalPedidos">
           <div className="FormaPagamento">
-            <div>
+            <div className='divTituloPagemento'>
               Forma de pagamento
             </div>
 
-            <div>
-              Cartão
-            </div>
-
+            
+            <select ref={refDoSelectDePagamento} className='divEscolhaPagemento' name="" id=""   /*disabled="disabled"*/>
+              <option value="#">Selecione uma opção</option>
+              <option value="debito"> Débito</option>
+              <option value="credito">Crédito</option>
+              <option value="aleloAlimentacaoRefeicao">Alelo alimentação e refeição</option>
+              <option value="ticketAlimentacaoRefeicao">Tiket alimentação e refeição</option>
+              <option value="pix">Pix</option>
+              <option value="dinheiro">Dinheiro</option>
+            </select>
+            
+            
           </div>
+          
           <div className="TotalPagamento">
             <div className="TotalValor">
               Total
@@ -230,7 +251,7 @@ function SacolaTop(props) {
           </div>
           
           <div className="FinalizaPedidos">
-            <div className='divNomeCliente'>
+            {/* <div className='divNomeCliente'>
               <div className='boxNomeCliente'>Nome</div>
               <input type="text" placeholder="Digite seu nome e finalize" onChange={(event) => setNomeCliente(event.target.value)}/>
             </div>
@@ -238,7 +259,7 @@ function SacolaTop(props) {
             <div className='divNumeroCliente'>
               <div className='boxNumeroCliente'>Celular</div>
               <InputMask mask="(99) 99999-9999" placeholder='Digite seu WhatsApp'  onChange={(event) => handleChangeNumero(event.target.value)}/>
-            </div>
+            </div> */}
 
             <div className='divBotaoFinalizaPedido'>
               <button onClick={() => enviaTodosOsPedidos(armazenaOsPedidos)}>Finalizar Pedido</button>

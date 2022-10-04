@@ -10,7 +10,7 @@ const Pedidos = db.define('Pedidos', {
         primaryKey: true
     },
     preco: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
         ,
         allowNull: false
     },
@@ -24,6 +24,10 @@ const Pedidos = db.define('Pedidos', {
     },
     qntItems: {
         type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    formaDePagamento: {
+        type: Sequelize.STRING,
         allowNull: false
     }
 
@@ -47,6 +51,6 @@ Clientes.hasMany(PedidosUser, {
 //Pedidos.sync()
 
 //Verifica se háalguma diferença na tabela, e realiza a alteração
-//Pedidos.sync({ alter: true })
+// Pedidos.sync({ alter: true })
 //
 module.exports = Pedidos;

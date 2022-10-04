@@ -10,27 +10,27 @@ body {
 }
 
 
-.Container {
+/* .Container {
   position: relative;
   width: 100%;
-}
+} */
 
 .Navegation {
-  max-height: 100vh;
+  min-height: 100vh;
   background: #003147;
   transition: 0.5s;
   overflow-x: hidden;
 }
 
-.BotaoON {
+/* .BotaoON {
   width: 300px;
 }
 .BotaoOFF {
   width: 60px;
-}
+} */
 
-.Navegation ul {
-  /*position: absolute;*/
+/* .Navegation ul {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100% ;
@@ -40,7 +40,7 @@ body {
 
   width: 100%;
   list-style: none;
-}
+} */
 
 .Navegation ul li:hover {
   background: #03a9f4;
@@ -147,6 +147,7 @@ body {
   
 
 }
+
 .Toggle {
   position: relative;
   width: 60px;
@@ -212,147 +213,26 @@ body {
 }
 
 
-.listaCriaEdita {
-  padding: 10px;
-  margin: 0% 5% 3% 5%;
-  border: 1px solid rgb(19, 216, 62);
-  display: grid;
-  grid-template-columns: 0.8fr 1fr ;
-  gap: 10px;
-  height: 430px;
-}
 
+/* 
 .listagemOpçõesMenus {
   border: 1px solid rgb(52, 163, 52);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 20px;
   
-}
-
-.pedidosRelacionados {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border: 1px solid rgb(86, 26, 224);
-  max-height: 450px;
-}
+} */
 
 
 
 
-.pedidosRelacionados ul thead tr td:nth-child(1) {
-  border: 0.5px solid red;
-  width: 60px;
-  text-align: center;
 
-}
-.pedidosRelacionados ul thead tr td:nth-child(2) {
-  border: 0.5px solid rgb(0, 255, 21);
-  width: 400px;
-  padding-left: 5px;
-}
-.pedidosRelacionados ul thead tr td:nth-child(3) {
-  border: 0.5px solid rgb(66, 147, 212);
-  width: 115px;
-  padding-left: 5px;
-}
-.pedidosRelacionados ul thead tr td:nth-child(4) {
-  border: 0.5px solid rgb(0, 255, 21);
-  width: 125px;
-  padding-left: 5px;
-}
 
-.OptionTapiocaCrepioca, .OptionLanches, .OptionSaladas, .OptionBebidas, .OptionSobremesas, .OptionDoces {
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  font-family: "Poppins";
-  font-weight: bold;
-  font-size: 20px;
-  color: #003147;
 
-  border-radius:5px;
 
-  max-height: 150px;
-} 
 
-.algun{
-  text-align: center;
-  padding: 15px;
 
-  border: 1px solid red;
-}
-.algun2{
 
-  padding: 15px;
 
-  border: 1px solid red;
-}
-.algun3{
-  text-align: center;
-  padding: 15px;
-
-  border: 1px solid red;
-}
-.algun4{
-  display: flex;
-  
-  justify-content: space-around;
-  align-items: center;
-
-  
-  padding: 15px 0px 15px 0px ;
-
-  border: 1px solid red;
-
-}
-
-.edicaoTopo  {
-  display: grid;
-  grid-template-columns: 0.2fr 1fr;
-}
-.edicaoTopo div {
-  border: 1px solid red;
-}
-
-.edicaoVoltar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.edicaoTitulo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.edicaoInputsoForm {
-  border: 1px solid red;
-  padding-right: 30px;
-  padding-left: 30px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.InputsForm {
-  margin-top: 5px;
-  border: 1px solid blue ;
-  width: 100%;
-  height: 30px;
-  border-radius: 4px;
-  padding: 0px 0px 0px 10px;
-}
-
-.BoxEscolhas {
-  border: 1px solid gold;
-}
-
-.EditarListar{
-  margin: 0px 10px 0px 0px;
-  text-align: center;
-  padding: 5px;
-}
 

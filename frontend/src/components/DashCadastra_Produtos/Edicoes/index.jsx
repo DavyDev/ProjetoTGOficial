@@ -1,6 +1,6 @@
 
 import './style.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios'
 
@@ -37,7 +37,11 @@ function Edicoes() {
   const estadoBotao = toggleClick ? 'BotaoON' : 'BotaoOFF'
   const estadoMain = toggleClick ? 'MainON' : 'MainOFF'
 
-  
+  const [itensParaSelecaoEdicao, setItensParaSelecaoEdicao] = useState([]);
+  const [armazenaItemsEcolhidosEdicao, setArmazenaItemsEcolhidosEdicao] = useState([])
+
+  const itemDeMontagemProdutoEdicao = useRef(null);
+  const qntItemDeMontagemProdutoEdicao = useRef(null);
 
   const handleClick = () => {
     SetToggleClick(!toggleClick)
@@ -175,40 +179,83 @@ function Edicoes() {
 
   const habilitaTelaEditar = (produtoASerEditado) => {
     SetProdutoParaSerEditado(produtoASerEditado)
+    setArmazenaItemsEcolhidosEdicao(JSON.parse(produtoASerEditado.dadosParaEstoque))
     SetTelaDeEdição(!telaDeEdição)
   }
   
-  const enviaAtualizcaoPedido =  async (event) => {
-    const trataValoresForms = {
-      id: produtoParaSerEditado.id,
-      titulo: valuesInputs.titulo,
-      descricao: valuesInputs.descricao,
-      imagem: valuesInputs.imagem,
-      preco: Number(valuesInputs.preco),
-      quantidade: Number(valuesInputs.quantidade),
-      cardapio: valuesInputs.cardapio,
-
-    }
+  const enviaAtualizacaoPedidoEdicao =  async (event) => {
     event.preventDefault()
+    axios.put(`http://localhost:3002/produtos/${produtoParaSerEditado.id}`, produtoParaSerEditado)
+      //.then((resposta) => resposta.json())
+      .then((resposta) => console.log(resposta.data))
+      .catch(() => console.log("Deu Errado"));
 
-    await axios.put(`http://localhost:3002/produtos/${trataValoresForms.id}`, `id=${trataValoresForms.id}&titulo=${trataValoresForms.titulo}&descricao=${trataValoresForms.descricao}&imagem=${trataValoresForms.imagem}&preco=${trataValoresForms.preco}&quantidade=${trataValoresForms.quantidade}&cardapio=${trataValoresForms.cardapio}`)
-        .then(response => console.log(response.data))
-        
-        .catch(erro => console.log(erro))
-
-
-    console.log(trataValoresForms)
     
+    
+
+    //  await axios.put(`http://localhost:3002/produtos/${trataValoresForms.id}`, `id=${trataValoresForms.id}&titulo=${trataValoresForms.titulo}&descricao=${trataValoresForms.descricao}&imagem=${trataValoresForms.imagem}&preco=${trataValoresForms.preco}&quantidade=${trataValoresForms.quantidade}&cardapio=${trataValoresForms.cardapio}`)
+    //   .catch(erro => console.log(erro))
+
+    
+    console.log("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+    console.log(produtoParaSerEditado)
+    console.log({
+      // titulo: event.target.titulo.value,
+      // // descricao: event.target.descricao.value,
+      // imagem: event.target.imagem.value,
+      // cardapio: event.target.cardapio.value,
+      // preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
+      // itemsEquantidades: armazenaItemsEcolhidosEdicao
+    })
+    
+  }
+
+  const vamosVer = (itemTeste) => {
+    console.log(itemTeste)
   }
 
   const handleChange = (event) => {
     const { name, value } = event.target
+
     
     SetValuesInputs({ ...valuesInputs, [name]: value})
+    SetProdutoParaSerEditado({ ...produtoParaSerEditado, [name]: value})
     
   }
 
+  const adicionaItensEdicao = (event) => {
+    event.preventDefault();
+    const armazenaDadosItemEdicao = {
+      nomeItem: itemDeMontagemProdutoEdicao.current.value,
+      qntItem: Number((qntItemDeMontagemProdutoEdicao.current.value).replace(",", ".")),
+    };
+    console.log(itemDeMontagemProdutoEdicao.current.value);
+    console.log(qntItemDeMontagemProdutoEdicao.current.value);
+    console.log(armazenaDadosItemEdicao);
+    // console.log(armazenaItemsEcolhidosEdicao);
+    setArmazenaItemsEcolhidosEdicao([...armazenaItemsEcolhidosEdicao, armazenaDadosItemEdicao]);
+    };
 
+
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3002/listaItensDosProdutos`)
+      .then((response) => response.data)
+      .then((resposta) => setItensParaSelecaoEdicao(resposta));
+  }, []);
+
+  useEffect(() => {
+    SetProdutoParaSerEditado({...produtoParaSerEditado, dadosParaEstoque: JSON.stringify(armazenaItemsEcolhidosEdicao)})
+  }, [armazenaItemsEcolhidosEdicao]);
+
+  const excluiItemDoProdutoEdicao = (i) => {
+    const nomeItemExcluidoEdicao = (armazenaItemsEcolhidosEdicao[i].nomeItem)
+    
+    const deixaSoItemsEscolhidosEdicao = armazenaItemsEcolhidosEdicao.filter((item, i) => item.nomeItem != nomeItemExcluidoEdicao)
+
+    setArmazenaItemsEcolhidosEdicao(deixaSoItemsEscolhidosEdicao)
+  }
 
   return(
 
@@ -275,8 +322,37 @@ function Edicoes() {
               </div>
             </div>
             <div className="pedidosRelacionados">
-              {telaDeEdição == false ? (<ul>
-                <thead>
+              {telaDeEdição == false ? (<table>
+
+                {/* <div className="tabelaItensEscolhidos"> */}
+                  
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Produto</th>
+                        <th>Categ.</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {lidaComPedidosCadastrar.map((itemSelecionado, i) => {
+                        return (
+                          <tr>
+                            <th className="algun">{itemSelecionado.id}</th>
+                            <td className="algun2">{itemSelecionado.titulo}</td>
+                            <td className="algun3">{itemSelecionado.cardapio}</td>
+                            <td className="algun4">
+                              <button  onClick={() => habilitaTelaEditar(itemSelecionado)}>Editar</button>
+                              <button onClick={() => excluiProdutoCardapio(itemSelecionado.id)}>Excluir</button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  
+                {/* </div> */}
+                {/* --------------------------------------------------- */}
+                {/* <thead>
                   <tr>
                     <td>Id</td>
                     <td>Produto</td>
@@ -286,32 +362,32 @@ function Edicoes() {
                 </thead>
                   
 
-                  <tbody >
-                    <br />
-                      {lidaComPedidosCadastrar.map((carro, i) => {
-                        return (<tr key={i}>
-                          <td className="algun">{carro.id}</td>
-                          <td className="algun2">{carro.titulo +"  "+ carro.descricao}</td>
-                          <td className="algun3">{carro.cardapio}</td>
-                          <td className="algun4">
-                            <button  onClick={() => habilitaTelaEditar(carro)}>Editar</button>
-                            <button onClick={() => excluiProdutoCardapio(carro.id)}>Excluir</button>
-                          </td>
-                        </tr>)
-                      })}
-                  </tbody>
+                <tbody >
+                  <br />
+                    {lidaComPedidosCadastrar.map((carro, i) => {
+                      return (<tr key={i}>
+                        <td className="">{carro.id}</td>
+                        <td className="">{carro.titulo}</td>
+                        <td className="">{carro.cardapio}</td>
+                        <td className="">
+                          <button  onClick={() => habilitaTelaEditar(carro)}>Editar</button>
+                          <button onClick={() => excluiProdutoCardapio(carro.id)}>Excluir</button>
+                        </td>
+                      </tr>)
+                    })}
+                </tbody> */}
                 
               
-              </ul>) : (
+                </table>) : (
                 
                 <div>
                   <div className="edicaoTopo">
-                    <div className="edicaoVoltar"><button onClick={() => habilitaTelaEditar()}>Voltar</button></div>
-                    <div className="edicaoTitulo"><h1 onClick={() => console.log(produtoParaSerEditado)}>Edição de pedidos {produtoParaSerEditado.id}</h1></div>
+                    <div className="edicaoVoltar"><button onClick={() => SetTelaDeEdição(!telaDeEdição)}>Voltar</button></div>
+                    <div className="edicaoTitulo"><h1 onClick={() => console.log(produtoParaSerEditado)}>Edição do produto {produtoParaSerEditado.id}</h1></div>
                   </div>
 
                   <div>
-                    <form onSubmit={(event) => enviaAtualizcaoPedido(event)} >
+                    <form onSubmit={(event) => enviaAtualizacaoPedidoEdicao(event)} >
                       <div className="edicaoInputsoForm">
                         <label  htmlFor="id">Id</label><br />
                         <input name="id" id="IdForm" className="InputsForm" type="text" value={produtoParaSerEditado.id} disabled/>
@@ -319,12 +395,12 @@ function Edicoes() {
 
                       <div className="edicaoInputsoForm">
                         <label  htmlFor="titulo">Titulo</label><br />
-                        <input name="titulo" id="TituloForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.titulo}/>
+                        <input name="titulo" id="TituloForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} value={produtoParaSerEditado.titulo}/>
                       </div>
 
                       <div className="edicaoInputsoForm">
-                        <label htmlFor="descricao">Descrição</label>
-                        <input name="descricao" id="DescricaoForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.descricao}/>
+                        <label htmlFor="descricao">Descrição (programar analisar certinho)</label>
+                        <input name="descricao" id="DescricaoForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} value={produtoParaSerEditado.descricao}/>
                       </div>
 
                       <div className="edicaoInputsoForm">
@@ -336,24 +412,89 @@ function Edicoes() {
                         <label htmlFor="cardapio">Menu do Cardapio</label>
                         <select name="cardapio" id="CardapioForme" className="InputsForm" onChange={(event) => handleChange(event)} >
                           <option value="">Selecione uma opção</option>
-                          <option value="tapiocacrepioca">Tapioca/Crepioca</option>
-                          <option value="lanches">Lanches</option>
-                          <option value="saladas">Saladas</option>
-                          <option value="bebidas">Bebidas</option>
-                          <option value="sobremesas">Sobremesas</option>
-                          <option value="doces">Doces</option>
+                          <option selected={produtoParaSerEditado.cardapio == "tapiocacrepioca" ? true : false} value="tapiocacrepioca">Tapioca/Crepioca</option>
+                          <option selected={produtoParaSerEditado.cardapio == "lanches" ? true : false} value="lanches">Lanches</option>
+                          <option selected={produtoParaSerEditado.cardapio == "saladas" ? true : false} value="saladas">Saladas</option>
+                          <option selected={produtoParaSerEditado.cardapio == "bebidas" ? true : false} value="bebidas">Bebidas</option>
+                          <option selected={produtoParaSerEditado.cardapio == "sobremesas" ? true : false} value="sobremesas">Sobremesas</option>
+                          <option selected={produtoParaSerEditado.cardapio == "doces" ? true : false} value="doces">Doces</option>
                         </select>
                       </div>
 
                       <div className="edicaoInputsoForm">
-                        <label htmlFor="preco">Preço</label>
-                        <input name="preco" id="PrecoForm" className="InputsForm"  type="number" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.preco}/>
+                        <label htmlFor="preco" onClick={() => vamosVer(armazenaItemsEcolhidosEdicao)}>Preço</label>
+                        <input name="preco" id="PrecoForm" className="InputsForm"  type="number" onChange={(event) => handleChange(event)} value={produtoParaSerEditado.preco}/>
                       </div>
+                      
+
+                      {/* <div className="edicaoInputsoForm">
+                        <label htmlFor="Quantidade" >Quantidade no estoque</label>
+                        <input name="quantidade" id="QuantidadeForm" className="InputsForm" type="number" onChange={(event) => handleChange(event)} />
+                      </div> */}
 
                       <div className="edicaoInputsoForm">
-                        <label htmlFor="Quantidade">Quantidade no estoque</label>
-                        <input name="quantidade" id="QuantidadeForm" className="InputsForm" type="number" onChange={(event) => handleChange(event)} />
+                        
+                        {/* <label htmlFor="descricao">Items do produto (Programar)</label>
+                        <input name="descricao" id="DescricaoForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.descricao}/>*/}
+                        <div className='divEdicaoDosItensDoProduto'>
+                          <div>
+
+                            <div className="selecionaOsItems">
+                              <label htmlFor="itens">Selecione os itens </label> <br />
+                              <select name="itens" ref={itemDeMontagemProdutoEdicao}>
+                                <option value="">Selecione uma opção</option>
+                                {itensParaSelecaoEdicao.map((item, i) => {
+                                  return <option value={item.nomeItem}>{item.nomeItem}</option>;
+                                })}
+                              </select>
+                            </div>
+
+                            <div className="selecionaQntItems">
+                              <label htmlFor="itens">Quantidade do item </label>{" "} <br />
+                              <input ref={qntItemDeMontagemProdutoEdicao} type="" name="" />
+                            </div>
+
+                            <div className="adicionaItemsEQuant">
+                              <button type="button" onClick={(event) => adicionaItensEdicao(event)}>Adicionar item</button>
+                            </div>
+
+                          </div>
+                          <div>tabela com os items
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Itens do Produto</th>
+                                  <th>Quanti.</th>
+                                  <th>Ações</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {armazenaItemsEcolhidosEdicao.map((itemSelecionado, i) => {
+                                  return (
+                                    <tr>
+                                      <th>{i + 1}</th>
+                                      <td>{itemSelecionado.nomeItem}</td>
+                                      <td>{itemSelecionado.qntItem}</td>
+                                      <td>
+                                        <button
+                                          type="button"
+                                          className="inputDaQntPorItem"
+                                          onClick={() => excluiItemDoProdutoEdicao(i)}
+                                        >
+                                          X
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
                       </div>
+
                       <div className="edicaoInputsoForm">
                         <button type="submit">Salvar</button>
                       </div>

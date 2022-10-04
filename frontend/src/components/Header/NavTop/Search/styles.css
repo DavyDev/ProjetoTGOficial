@@ -71,11 +71,18 @@ input::-webkit-calendar-picker-indicator:hover{
 }
 
 .listCanBeOpen{
-  background-color: cadetblue;
+  background-color: #FFF;
   width: 540px;
   border-radius: 0px 0px 3px 3px;
   position: absolute;
   padding: 20px 0px 20px 0px;
   margin-top: 32.5px;
   border-top: 5px solid #F94747;
+}
+
+.nenhumResultadoEncontrado{
+  font-family: "PoppinsSemiBold";
+  font-size: 14px;
+  /* border: 1px solid red; */
+  padding: 8px 0px 8px 15px;
 }

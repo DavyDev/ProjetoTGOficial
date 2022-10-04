@@ -15,7 +15,7 @@ class ProdutosController {
         }
         console.log("belele")
     
-        console.log(trataBody)
+        // console.log(trataBody)
 
         
         let textoCompleto = ''
@@ -31,10 +31,10 @@ class ProdutosController {
             if(trataBody.descricao.length > 1) {
 
                 if(i != trataBody.descricao.length -1){
-                    textoCompleto = textoCompleto + trataBody.descricao[i].qntItem + " " + trataBody.descricao[i].nomeItem + "," + " "
+                    textoCompleto = textoCompleto + (trataBody.descricao[i].qntItem != 1 ? trataBody.descricao[i].qntItem  + " " + trataBody.descricao[i].nomeItem + "," + " " :  trataBody.descricao[i].nomeItem + "," + " ")
                 }
                 else if(i == trataBody.descricao.length -1){
-                    textoCompleto = textoCompleto + trataBody.descricao[i].qntItem + " " + trataBody.descricao[i].nomeItem + "."
+                    textoCompleto = textoCompleto + (trataBody.descricao[i].qntItem != 1 ? trataBody.descricao[i].qntItem + " " + trataBody.descricao[i].nomeItem + "." : " " + trataBody.descricao[i].nomeItem + ".")
                 }
                 
             }
@@ -56,16 +56,18 @@ class ProdutosController {
     
          await CadastrarProdutos.create(trataBody)
             .then(() => {
+                console.log("Heloooo")
                 return res.json({
                     erro: false,
                     mensagem: "Usuário foi cadastrado"
                 })
             })
             .catch(() => {
+                console.log("Byeeeeee")
                 return res.json({
-                    erro: true,
-                    mensagem: "Usuário não foi cadastrado"
-                })
+                        erro: true,
+                        mensagem: "Usuário não foi cadastrado"
+                    })
             })
         
     }
@@ -90,6 +92,7 @@ class ProdutosController {
                   cardapio: cardapio
                 }
               })
+            //   console.log(ListDosProdutos)
               return res.status(200).json(ListDosProdutos)
         }
 
@@ -107,49 +110,35 @@ class ProdutosController {
             imagem: req.body.imagem,
             preco: Number(req.body.preco),
             quantidade: Number(req.body.quantidade),
-            cardapio:  req.body.cardapio
+            cardapio:  req.body.cardapio,
+            dadosParaEstoque:  req.body.dadosParaEstoque
         }
 
-        const { id } = req.params
+        // const { id } = req.params
         
-        console.log(id)
-        console.log(trataBody)
-        //const id = req.params.id
-        //const produto = await CadastrarProdutos.findByPk(id)
-        //if(!id) return console.log("Insucesso")
-        //if(!produto) return console.log("Insucesso")
+        console.log(req.body)
+        // console.log(trataBody)
+        
+        
+        
+        // const encontrandoOProd = await CadastrarProdutos.findAll({
+        //     where: {
+        //         id: id
+        //     }
+        // })
+        // console.log(encontrandoOProd)
 
-        //await produto.update(trataBody)
-        //await produto.destroy()
-
+        
         await CadastrarProdutos.update(trataBody, {
             where: {
-              id: id
+              id: req.body.id
            }
           });
 
-        return res.json({
-            id: id,
-           body: trataBody
-        })
-
-        
-
-        /*await CadastrarProdutos.update()
-
-
-          .then(() => {
-            return res.json({
-                erro: false,
-                mensagem: "Testando aqui Rapaz"
-            })
-        })
-        .catch(() => {
-            return res.json({
-                erro: true,
-                mensagem: "Usuário não foi Atualizado"
-            })
-        });*/
+        // return res.json({
+        //     id: id,
+        //    body: trataBody
+        // })
     }
 
     async DeleteProdutos(req, res, next) {

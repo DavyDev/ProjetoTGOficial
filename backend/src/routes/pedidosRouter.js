@@ -11,6 +11,7 @@ const ClientesESeusPedidosController = require('../../controllers/ClienteESeusPe
 const ConsultaPedidosSolicitados = require('../../controllers/ConsultaPedidosSolicitadosController')
 const TesteLoginUser = require('../../controllers/SessionControllerLogin')
 const ItensControllers = require('../../controllers/ItensControllers')
+const SujestoesDeClientes = require('../../controllers/SujestoesDeCientes')
 //const CadastrarProdutos = require('../../models/CadastrarProdutos')
 //Linha que irá pegar e fornecer os dados de cada pedido 
 const dadosFornecidos = require('../../data/pedidos')
@@ -50,14 +51,14 @@ router.get('/pedidosFeitos/cliente/anonimousCliente/:codClienteAnonimo', Cliente
 router.put('/pedidosFeitos/cliente', urlencodedParser, ClientesESeusPedidosController.MudandoEstagioPedido)
 //router.post('/teste/:nomeCliente/:titulo/:descricao/:preco/:quantide', ClientesESeusPedidosController.JuntandoPedidosaoCliente)
 
-            /*id: 6,
-            titulo: "HatunaMatata",
-            descricao: "Batatinha frita 123",
-            imagem: "URL1",
-            preco: 0,
-            quantidade: 0,
-            cardapio: "tapiocacrepioca",
-            IdCliente: novoCliente.id*/
+/*id: 6,
+titulo: "HatunaMatata",
+descricao: "Batatinha frita 123",
+imagem: "URL1",
+preco: 0,
+quantidade: 0,
+cardapio: "tapiocacrepioca",
+IdCliente: novoCliente.id*/
 
 //router.get('/produtos/:id', ProdutosController.ListProdutos)
 /*router.get('/produtos', (req, res, next) => {
@@ -86,6 +87,18 @@ router.post('/produtosNosPedidos/cliente', PedidosControllers.RegistraProdutosDo
 router.get('/listaItensDosProdutos', urlencodedParser, ItensControllers.ListaItens)
 router.post('/registraItensDosProdutos', urlencodedParser, ItensControllers.RegistraItens)
 
+    //-Itens do estoque-------------------------------------------------------------------------------------
+
+        //Quando o clinte acessa a area de estoque deve ser listado os itens atuais em estoque (igual a linha 87) 
+        router.get('/listaItensDoEstoque', urlencodedParser, ItensControllers.ListaItens)
+        
+        //Quando o clinte acessa a area de estoque e realiza uma atualização na quantidade em estoque 
+        router.put('/atualizaItensDoEstoque', urlencodedParser, ItensControllers.AtualizaQuantidadeDoItem)
+
+        //Quando o clinte acessa a area de estoque e realiza a exclusão de um item no estoque 
+        router.delete('/excluiItensDoEstoque/:id', urlencodedParser, ItensControllers.ExcluiQuantidadeDoItem)
+
+
 //-Parte relacionada a "Pedidos" e "Meus Dados" quando o cliente esta logado-------------------------------------------------------------------------------------
 
     //Quando o clinte acessa a area de pedidos dele   
@@ -100,5 +113,11 @@ router.post('/registraItensDosProdutos', urlencodedParser, ItensControllers.Regi
     //Quando o cliente deseja atualizar as informaçõesdo tipo (Nome e/ou Número)
     router.put('/atualizandoNomeCelularDoUser', urlencodedParser, ClienteESeusDadosEInformacoes.Atualizandodados_NomeCelular)
     
+//Aqui é por onde todas as sujestões serão solicitadaspara ser carregadas na tela
+router.get('/carregaSujestoesDeClientes', SujestoesDeClientes.CarregaSujestoes)
+//Aqui é por onde todas as sujestões serão enviadas e criadas
+router.post('/enviaSujestoesDeClientes', SujestoesDeClientes.RegistraSujestoes)
+
+
 
 module.exports = router

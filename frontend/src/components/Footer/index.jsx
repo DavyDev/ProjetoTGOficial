@@ -3,7 +3,30 @@ import './styles.css';
 
 import ImgFacebook from '../../assets/images/RedesSociaisFooter/facebook.png'
 import ImgInstagram from '../../assets/images/RedesSociaisFooter/instagram.png'
+import axios from 'axios';
 
+const enviaSujestao = (event) => {
+  event.preventDefault()
+
+  console.log(event.target.sujestoes.value)
+
+  if(event.target.sujestoes.value != ""){
+
+    axios.post("http://localhost:3002/enviaSujestoesDeClientes", {
+        mensagemDeixadaPeloCliente: event.target.sujestoes.value
+      })
+      //.then((resposta) => resposta.json())
+        .then((resposta) => console.log(resposta.data))
+        .catch(() => console.log("Deu Errado"))
+    
+        document.getElementById("comentariosFooter").value = ""
+
+    alert("Sua sujestão foi enviada com sucesso")    
+  }
+  else{
+    alert("Deixe uma sujestão")
+  }
+}
 
 function Footer() {
   return (
@@ -59,12 +82,12 @@ function Footer() {
       <div className="TerceiraDivFooter">
 
         <div className="BoxDeSujestoes">
-          <form className="Form" action="">
+          <form className="Form" onSubmit={(event) => enviaSujestao(event)}>
             <p className="LabelAerea" >
               Deixe suas Sujestões a baixo !
             </p>
             <div className='BoxArea'>
-              <textarea name="" id="comentariosFooter" cols="30" rows="10" placeholder="Digite aqui...">
+              <textarea name="sujestoes" id="comentariosFooter" cols="30" rows="10" placeholder="Digite aqui...">
               </textarea>
             </div>
             <input className="Submit" type="submit" />

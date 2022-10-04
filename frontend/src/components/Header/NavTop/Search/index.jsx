@@ -81,17 +81,21 @@ function Search() {
 
       </div>
       <div className={`listDasBuscas ${classeAbreLista}`}>
-      {filtragemProdutosPesquisados.map((itemDoMenu) => {
-        return(
-          <ul className='listaTodosProcurados' >
-            <li onClick={() => levaAoProduto(`ProdId_${itemDoMenu.id}`)}>
-              <h4>{itemDoMenu.titulo}</h4>
-              <p>{itemDoMenu.descricao}</p>
-              
-            </li>
-          </ul>
-        )
-      })}
+      {filtragemProdutosPesquisados.length == 0 ? 
+        <div className='nenhumResultadoEncontrado'>Nenhum resultatdo encontrados...</div> : 
+        filtragemProdutosPesquisados.map((itemDoMenu) => {
+          return(
+            // <div>Não teve resultados</div>
+            <ul className='listaTodosProcurados' >
+              <li onClick={() => levaAoProduto(`ProdId_${itemDoMenu.id}`)}>
+                <h4>{itemDoMenu.titulo}</h4>
+                <p>{itemDoMenu.descricao}</p>
+                
+              </li>
+            </ul>
+          )
+        })
+      }
       </div>
     </div>
   );

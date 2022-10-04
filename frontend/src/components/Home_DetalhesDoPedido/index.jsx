@@ -18,7 +18,7 @@ function Home_DetalhesDoPedido() {
     const dataEHoraDoPedido = armazenaDadosDoPedido[0].createdAt
     const data = new Date(dataEHoraDoPedido)
     const dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
-    const horaFormatada = data.toLocaleTimeString('pt-BR', {timeZone: 'UTC'})
+    const horaFormatada = data.toLocaleTimeString('pt-BR', { hour12: false })
 
     const [subTotal, setSubTotal] = useState(0)
     const voltaMenu = useHistory()
@@ -50,6 +50,7 @@ function Home_DetalhesDoPedido() {
         // console.log(armazenaProdutosDoPedido)
         // console.log(armazenaValores)
         console.log(armazenaDadosDoPedido)
+        console.log(armazenaProdutosDoPedido)
     }
 
 
@@ -81,9 +82,16 @@ function Home_DetalhesDoPedido() {
                         <div className='listaProdutosDoPedido'>
                             {armazenaProdutosDoPedido.map((prod, i) => {
                                 return(
-                                    <div className='divDosProds'>
-                                        <div>5x teste Eleonora</div>
-                                        <div>R$ {prod.preco.toFixed(2)}</div>
+                                    <div className='divMaiorDosProds'>
+                                        <div className='divDosProds'>
+                                            <div>{prod.quantidade}x {prod.titulo}</div>
+                                            <div>R$ {prod.preco.toFixed(2)}</div>
+                                        </div>
+                                        {prod.comentario != "" ? 
+                                        <div>
+                                            <p>Observações: <span>{prod.comentario}</span></p> 
+                                        </div> 
+                                        : ""}
                                     </div>
                                 )
                             })}
@@ -111,7 +119,15 @@ function Home_DetalhesDoPedido() {
                             </div>
                             <div className='divFormaDePagamento'>
                                 <div className='FormaDePagamento'>Forma de pagamento</div>
-                                <div className='formaEscolhida'>programar essa parte</div>
+                                <div className='formaEscolhida'>
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "debito" ? 'Débito' : "" }
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "credito" ? 'Crédito' : "" }
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "aleloAlimentacaoRefeicao" ? 'Alelo alimentação e refeição' : "" }
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "ticketAlimentacaoRefeicao" ? 'Ticket alimentação e refeição' : "" }
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "pix" ? 'Pix' : "" }
+                                    {armazenaDadosDoPedido[0].formaDePagamento == "dinheiro" ? 'Dinheiro' : "" }
+                                    
+                                </div>
                             </div>
                             <div className='divStatusDoPedido'>
                                 <div className='statusDoPedido' onClick={() => verDetalhes()}>Status do pedido</div>

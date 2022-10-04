@@ -17,7 +17,8 @@ class PedidosControllers {
             preco: req.body.preco,
             nomeClienteFezPedido: req.body.nomeUsuario,
             pertenceColumn: "fazer",
-            qntItems: req.body.qntItems
+            qntItems: req.body.qntItems,
+            formaDePagamento: req.body.formaDePagamento
         })
         console.log("------------^~")
         console.log(pedidoSendoCriado)

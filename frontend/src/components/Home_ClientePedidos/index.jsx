@@ -58,7 +58,7 @@ function ComponentTesteDoMain() {
 
     // }, [listandoPedidosFeitoPeloCliente])
 
-    const testeFunçao = (numeroDoPedido) => {
+    const testeFuncao = (numeroDoPedido) => {
         // console.log(armazenaProdutosDosPedidos.length)
         // console.log(listandoPedidosFeitoPeloCliente[1].dataValues.pertenceColumn)
         // console.log(listandoPedidosFeitoPeloCliente[1].primeiroProduto)
@@ -108,7 +108,7 @@ function ComponentTesteDoMain() {
                                             {pedido.dataValues.qntItems > 2 ? <div>mais {pedido.dataValues.qntItems - 1} itens</div> : "" }
                                         </div>
                                         <hr />
-                                        <div className="verdetalhesDoPedido" onClick={() => testeFunçao(pedido.dataValues.id)}>
+                                        <div className="verdetalhesDoPedido" onClick={() => testeFuncao(pedido.dataValues.id)}>
                                             Ver detalhes →
                                         </div>
                                     </div>

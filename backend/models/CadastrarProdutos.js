@@ -25,7 +25,7 @@ const CadastrarProdutos = db.define('produtosCadastrados', {
         allowNull: false
     },
     preco: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
         ,
         allowNull: false
     },

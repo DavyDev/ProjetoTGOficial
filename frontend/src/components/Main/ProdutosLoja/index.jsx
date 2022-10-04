@@ -13,12 +13,12 @@ const pedidosSelecionados = []
 function ProdutosLoja() {
 
   //Pedidos do menu que serão mostrados na tela
-  const [pedidosTapiocaCrepioca, setPedidosTapiocaCrepioca] = useState([pedidosCadastrados])
-  const [pedidosLanches, setPedidosLanches] = useState([pedidosCadastrados])
-  const [pedidosSaladas, setPedidosSaladas] = useState([pedidosCadastrados])
-  const [pedidosBebidas, setPedidosBebidas] = useState([pedidosCadastrados])
-  const [pedidosSobremesas, setPedidosSobremesas] = useState([pedidosCadastrados])
-  const [pedidosDoces, setPedidosDoces] = useState([pedidosCadastrados])
+  const [pedidosTapiocaCrepioca, setPedidosTapiocaCrepioca] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
+  const [pedidosLanches, setPedidosLanches] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
+  const [pedidosSaladas, setPedidosSaladas] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
+  const [pedidosBebidas, setPedidosBebidas] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
+  const [pedidosSobremesas, setPedidosSobremesas] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
+  const [pedidosDoces, setPedidosDoces] = useState([{id: 0, cardapio: '', titulo: '', descricao: '', imagem: '', preco: 0, quantidade: "", titulo: "", updatedAt: ""}])
 
   //Pedidos do menu que foram escolhidos pelo cliente pra efetuar a compra
   const [armazenaPedidos, setArmazenaPedidos] = useState("Nenhum pedido armazenado")
@@ -121,7 +121,8 @@ function ProdutosLoja() {
   const mostrandoDados = () => {
     console.log(pedidosTapiocaCrepioca)
   }
-
+  
+  console.log(pedidosLanches)
 
  
 
@@ -144,7 +145,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">
@@ -172,7 +173,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">
@@ -201,7 +202,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">
@@ -230,7 +231,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">
@@ -258,7 +259,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">
@@ -286,7 +287,7 @@ function ProdutosLoja() {
                   {carro.descricao}
                 </div>
                 <div className="PrecoPedido">
-                  R$ {carro.preco}
+                  R$ {(carro.preco).toFixed(2).replace(".", ",")}
                 </div>
               </div>
               <div className="ImagemPedido">

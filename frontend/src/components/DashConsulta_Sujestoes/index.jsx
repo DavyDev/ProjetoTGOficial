@@ -11,7 +11,10 @@ import DashBarsToggle from '../../assets/icons/DashHeader/DashBarsToggle.png'
 import DashSearch from '../../assets/icons/DashHeader/DashSearch.png'
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
-
+import { BigHead } from '@bigheads/core'
+import { eyesMap } from '@bigheads/core'
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function DashConsultaSujestoes() {
   console.log("")
@@ -19,13 +22,37 @@ function DashConsultaSujestoes() {
   const estadoBotao = toggleClick ? 'BotaoON' : 'BotaoOFF'
   const estadoMain = toggleClick ? 'MainON' : 'MainOFF'
 
+  const [carregaAsMensagens, setCarregaAsMensagens] = useState([1,2])
+
+  const testeDeData = (dataDaMensagem) => {
+    const data = new Date(dataDaMensagem)
+    const dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+    const horaFormatada = data.toLocaleTimeString('pt-BR', { hour12: false })
+    
+    console.log("--------------")
+    return(`${dataFormatada} - ${horaFormatada}`)
+  } 
+
+  console.log(carregaAsMensagens)
+
+  useEffect(() => {
+    axios.get(`http://localhost:3002/carregaSujestoesDeClientes`)
+            .then((resposta) => setCarregaAsMensagens(resposta.data))
+            .catch(() => console.log("Deu Errado"))
+  },[])
+
   const handleClick = () => {
     SetToggleClick(!toggleClick)
 
 
   }
-  console.log(estadoBotao)
-  console.log(estadoMain)
+  // console.log(carregaAsMensagens)
+  // console.log(estadoMain)
+
+  
+  const mostra = () => {
+    console.log(carregaAsMensagens)
+  }
 
 
   return(
@@ -111,8 +138,49 @@ function DashConsultaSujestoes() {
             </label>
           </div>
         </div>
-        <div>
-        <p>teste Consultar Sujestões</p>
+        <div className='divSujestoes'>
+          <div className="tituloSujestoes">
+            <h2 onClick={() => mostra()}>Comentários e sujestões deixados por clientes anônimos</h2>
+          </div>
+
+          <div className='containerDasMensagens'>
+            {carregaAsMensagens.map((mensagen, id) => {
+                return(
+                  <div className="divSujestao">
+                    <div className='imgAvatarCliente'>
+                      <BigHead
+                        accessory="roundGlasses"
+                        body="chest"
+                        circleColor="blue"
+                        clothing="naked"
+                        clothingColor="white"
+                        eyebrows="angry"
+                        eyes="happy"
+                        faceMask={false}
+                        faceMaskColor="red"
+                        facialHair="mediumBeard"
+                        graphic="gatsby"
+                        hair="pixie"
+                        hairColor="blonde"
+                        hat="none"
+                        hatColor="blue"
+                        lashes={false}
+                        lipColor="turqoise"
+                        mask={true}
+                        mouth="grin"
+                        skinTone="light"
+                      />
+                    </div>
+                    <div className='mensagemDeixada'>
+                      <div className='dataDaMensagem'>Enviada em: {testeDeData(mensagen.createdAt)}</div>
+                      <div className='mensagemEscrita'>{mensagen.sujestaoOuComentario}</div>
+                    </div>
+                  </div>
+                )
+              })}
+          </div>
+            
+          
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ const ProdutosPedidos = db.define('ProdutosPedidos', {
         allowNull: false
     },
     preco: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
         ,
         allowNull: false
     },
@@ -68,6 +68,6 @@ ProdutosPedidos.belongsTo(Pedidos, {
 //ProdutosPedidos.sync()
 
 //Verifica se háalguma diferença na tabela, e realiza a alteração
-//ProdutosPedidos.sync({ alter: true })
+// ProdutosPedidos.sync({ alter: true })
 //
 module.exports = ProdutosPedidos;
