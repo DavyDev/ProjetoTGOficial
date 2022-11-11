@@ -8,6 +8,10 @@ const CadastrarProdutos = db.define('produtosCadastrados', {
         allowNull: false,
         primaryKey: true
     },
+    ativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
     cardapio: {
         type: Sequelize.STRING,
         allowNull: false
@@ -47,6 +51,6 @@ const CadastrarProdutos = db.define('produtosCadastrados', {
 //CadastrarProdutos.sync()
 
 //Verifica se háalguma diferença na tabela, e realiza a alteração
-//CadastrarProdutos.sync({ alter: true })
+// CadastrarProdutos.sync({ alter: true })
 
 module.exports = CadastrarProdutos;

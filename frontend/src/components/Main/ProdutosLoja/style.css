@@ -50,10 +50,18 @@
 }
 
 .ImagemPedido{
-
   display: flex;
+  width: 100%;
+  height: 110px;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
+}
+
+.ImagemPedido img{
+  width: 100%;
+  height: 100%;
+  
 }
 
 .SecaoMenu{

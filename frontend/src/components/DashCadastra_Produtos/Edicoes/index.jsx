@@ -4,6 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios'
 
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage"
+import "./style.css";
+import { storageFirebase } from "../../../firebase";
+import Swal from 'sweetalert2'
+
 
 /*import DashLogoDeck from '../../assets/icons/DashHeader/DashLogoDeck.svg'
 import DashCadastraProdutos from '../../assets/icons/DashHeader/DashCadastraProdutos.png'
@@ -30,6 +35,7 @@ function Edicoes() {
   const [toggleClick, SetToggleClick] = useState(true)
   const [telaDeEdição, SetTelaDeEdição] = useState(false)
   const [produtoParaSerEditado, SetProdutoParaSerEditado] = useState(false)
+  const [nomeDoProdutoParaSerEditado, setNomeDoProdutoParaSerEditado] = useState('')
   const [valuesInputs, SetValuesInputs] = useState(initialValuesFormUpdate)
   console.log(valuesInputs)
   const [lidaComPedidosCadastrar, SetLidaComPedidosCadastrar] = useState([])
@@ -43,6 +49,55 @@ function Edicoes() {
   const itemDeMontagemProdutoEdicao = useRef(null);
   const qntItemDeMontagemProdutoEdicao = useRef(null);
 
+  //Firebase-------------------------------------
+  const imgEscolhidaFirebaseEdicao = useRef(produtoParaSerEditado.imagem)
+  const [progressaoUploadEdicao, setProgressaoUploadEdicao] = useState(0)
+  const [imgUrlEdicao, setImgUrlEdicao] = useState('')
+
+  const handleUoloadImageFirebaseEdicao = (event) => {
+    setImgUrlEdicao("")
+    // const fileImg = event.split("\\", -1)
+
+    console.log(event.files)
+
+    const file = event.files[0]
+    
+    console.log(file)
+    if(!file) return;
+
+    const storageRef = ref(storageFirebase, `images/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(((snapshot.bytesTransferred / snapshot.totalBytes) * 100))
+        setProgressaoUploadEdicao(progress)
+      },
+      error => {
+        alert(error)
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(url => {
+          setImgUrlEdicao(url)
+          SetProdutoParaSerEditado({ ...produtoParaSerEditado, imagem: url})
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Upload de atualização da imagem realizado com sucesso. Não esqueça de salvar as alterações realizadas.',
+            imageUrl: url,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+          })
+        })
+      }
+    )
+  }
+
+
+
+  //Firebase-------------------------------------
+  
   const handleClick = () => {
     SetToggleClick(!toggleClick)
 
@@ -111,54 +166,124 @@ function Edicoes() {
   const identifica = (event) => {
   console.log(event.target.id)
     setGuardaSecaoDoCardapio(event.target.id)
-
-    switch (event.target.id) {
-      case "tapiocacrepioca":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/tapiocacrepioca`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-
-      case "lanches":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/lanches`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-
-      case "saladas":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/saladas`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-
-      case "bebidas":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/bebidas`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-
-      case "sobremesas":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/sobremesas`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-
-      case "doces":
-        console.log("Este id aqui é o da tapioca")
-        fetch(`http://localhost:3002/produtos/doces`)
-        .then(response => response.json())
-        .then(resposta => SetLidaComPedidosCadastrar(resposta))
-        break;
-    
-      default:
-        console.log("Não achou")
-        break;
+    if(telaDeEdição == false) {
+      switch (event.target.id) {
+        case "tapiocacrepioca":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/tapiocacrepioca`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+  
+        case "lanches":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/lanches`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+  
+        case "saladas":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/saladas`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+  
+        case "bebidas":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/bebidas`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+  
+        case "sobremesas":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/sobremesas`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+  
+        case "doces":
+          console.log("Este id aqui é o da tapioca")
+          fetch(`http://localhost:3002/produtosParaEdicao/doces`)
+          .then(response => response.json())
+          .then(resposta => SetLidaComPedidosCadastrar(resposta))
+          break;
+      
+        default:
+          console.log("Não achou")
+          break;
+      }
     }
+    else if(telaDeEdição == true){
+      Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Caso volte para a listagem, se foram feitas alterações no produto, elas serão perdidas",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Listar produtos',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          SetTelaDeEdição(telaDeEdição == false)
+
+          switch (event.target.id) {
+            case "tapiocacrepioca":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/tapiocacrepioca`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+      
+            case "lanches":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/lanches`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+      
+            case "saladas":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/saladas`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+      
+            case "bebidas":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/bebidas`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+      
+            case "sobremesas":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/sobremesas`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+      
+            case "doces":
+              console.log("Este id aqui é o da tapioca")
+              fetch(`http://localhost:3002/produtos/doces`)
+              .then(response => response.json())
+              .then(resposta => SetLidaComPedidosCadastrar(resposta))
+              break;
+          
+            default:
+              console.log("Não achou")
+              break;
+          }
+          
+          
+        }
+      })
+      
+    }
+    
 
     /*console.log("O componente foi montado")
     fetch('http://localhost:3002/produtos')
@@ -169,60 +294,92 @@ function Edicoes() {
   }
   const excluiProdutoCardapio = async (valorId) => {
     console.log(valorId)
-    await axios.delete(`http://localhost:3002/produtos/${valorId}`)
+    Swal.fire({
+      title: 'Você deseja mesmo excluir este produto?',
+      text: "Não sera possivel reverter esse processo.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Cancelar produto',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:3002/produtos/${valorId}`)
         .then(response => console.log(response.data))
         
-    await fetch(`http://localhost:3002/produtos/${guardaSecaoDoCardapio}`)
-            .then(response => response.json())
-            .then(resposta => SetLidaComPedidosCadastrar(resposta))
+        await fetch(`http://localhost:3002/produtos/${guardaSecaoDoCardapio}`)
+                .then(response => response.json())
+                .then(resposta => SetLidaComPedidosCadastrar(resposta))
+      }
+      
+    })
+    
   }
 
   const habilitaTelaEditar = (produtoASerEditado) => {
     SetProdutoParaSerEditado(produtoASerEditado)
     setArmazenaItemsEcolhidosEdicao(JSON.parse(produtoASerEditado.dadosParaEstoque))
+    setNomeDoProdutoParaSerEditado(produtoASerEditado.titulo)
     SetTelaDeEdição(!telaDeEdição)
   }
   
-  const enviaAtualizacaoPedidoEdicao =  async (event) => {
+  const enviaAtualizacaoPedidoEdicao = async (event) => {
     event.preventDefault()
     axios.put(`http://localhost:3002/produtos/${produtoParaSerEditado.id}`, produtoParaSerEditado)
       //.then((resposta) => resposta.json())
-      .then((resposta) => console.log(resposta.data))
-      .catch(() => console.log("Deu Errado"));
-
-    
-    
-
-    //  await axios.put(`http://localhost:3002/produtos/${trataValoresForms.id}`, `id=${trataValoresForms.id}&titulo=${trataValoresForms.titulo}&descricao=${trataValoresForms.descricao}&imagem=${trataValoresForms.imagem}&preco=${trataValoresForms.preco}&quantidade=${trataValoresForms.quantidade}&cardapio=${trataValoresForms.cardapio}`)
-    //   .catch(erro => console.log(erro))
-
-    
-    console.log("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
-    console.log(produtoParaSerEditado)
-    console.log({
-      // titulo: event.target.titulo.value,
-      // // descricao: event.target.descricao.value,
-      // imagem: event.target.imagem.value,
-      // cardapio: event.target.cardapio.value,
-      // preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
-      // itemsEquantidades: armazenaItemsEcolhidosEdicao
-    })
+      .then((resposta) => {
+        console.log(resposta.data)
+        // SetProdutoParaSerEditado(resposta.data.produtoAtualizado)
+        Swal.fire(
+          'Sucesso!',
+          'Seu produto foi atualizado na plataforma.',
+          'success'
+          )
+          
+        })
+        .catch(() => {
+          console.log("Deu Errado")
+          Swal.fire(
+          'Erro!',
+          'Não foi possivel atualizar o produto, verifique se todos os campos foram preenchidos.',
+          'error'
+          )
+        });
+        
+        
+        
+        
+        //  await axios.put(`http://localhost:3002/produtos/${trataValoresForms.id}`, `id=${trataValoresForms.id}&titulo=${trataValoresForms.titulo}&descricao=${trataValoresForms.descricao}&imagem=${trataValoresForms.imagem}&preco=${trataValoresForms.preco}&quantidade=${trataValoresForms.quantidade}&cardapio=${trataValoresForms.cardapio}`)
+        //   .catch(erro => console.log(erro))
+        
+        
+        // console.log("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+        // console.log(produtoParaSerEditado)
+        // console.log({
+          //   // titulo: event.target.titulo.value,
+          //   // // descricao: event.target.descricao.value,
+          //   // imagem: event.target.imagem.value,
+          //   // cardapio: event.target.cardapio.value,
+          //   // preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
+          //   // itemsEquantidades: armazenaItemsEcolhidosEdicao
+          // })
     
   }
-
+  
   const vamosVer = (itemTeste) => {
     console.log(itemTeste)
   }
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target
-
     
+    console.log(name)
     SetValuesInputs({ ...valuesInputs, [name]: value})
     SetProdutoParaSerEditado({ ...produtoParaSerEditado, [name]: value})
     
   }
-
+  
   const adicionaItensEdicao = (event) => {
     event.preventDefault();
     const armazenaDadosItemEdicao = {
@@ -234,27 +391,146 @@ function Edicoes() {
     console.log(armazenaDadosItemEdicao);
     // console.log(armazenaItemsEcolhidosEdicao);
     setArmazenaItemsEcolhidosEdicao([...armazenaItemsEcolhidosEdicao, armazenaDadosItemEdicao]);
-    };
-
-
-
+  };
+  
+  
+  
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/listaItensDosProdutos`)
-      .then((response) => response.data)
-      .then((resposta) => setItensParaSelecaoEdicao(resposta));
+    .get(`http://localhost:3002/listaItensDosProdutos`)
+    .then((response) => response.data)
+    .then((resposta) => setItensParaSelecaoEdicao(resposta));
   }, []);
-
+  
   useEffect(() => {
     SetProdutoParaSerEditado({...produtoParaSerEditado, dadosParaEstoque: JSON.stringify(armazenaItemsEcolhidosEdicao)})
   }, [armazenaItemsEcolhidosEdicao]);
-
+  
   const excluiItemDoProdutoEdicao = (i) => {
     const nomeItemExcluidoEdicao = (armazenaItemsEcolhidosEdicao[i].nomeItem)
     
     const deixaSoItemsEscolhidosEdicao = armazenaItemsEcolhidosEdicao.filter((item, i) => item.nomeItem != nomeItemExcluidoEdicao)
-
+    
     setArmazenaItemsEcolhidosEdicao(deixaSoItemsEscolhidosEdicao)
+  }
+  
+  const voltarListaDeProdutos = () => {
+    SetTelaDeEdição(!telaDeEdição)
+    fetch(`http://localhost:3002/produtos/${guardaSecaoDoCardapio}`)
+    .then(response => response.json())
+    .then(resposta => SetLidaComPedidosCadastrar(resposta))
+  }
+  
+  const congelamentodoProd = (dadosProd) => {
+    
+    const { idCongelamento, statusCongelamento } = dadosProd
+    
+    switch (statusCongelamento) {
+      case 0:
+        console.log("É para descongelar")
+        console.log(dadosProd)
+        
+        // .then((resposta) => setItensParaSelecaoEdicao(resposta));
+        Swal.fire({
+          title: 'Você deseja descongelar o produto?',
+          text: "Ao descongelar o produto ele ficará disponivel para compras na plataforma",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Descongelar produto',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios
+            .put(`http://localhost:3002/comgelamentoProdutos/${idCongelamento}`, dadosProd)
+            .then((response) => {
+              console.log(response.status)
+              // alert("produto atualizado")
+              console.log(guardaSecaoDoCardapio)
+                  Swal.fire(
+                    'Sucesso!',
+                    'Produto descongelado.',
+                    'success'
+                  ).then(response => {
+                    fetch(`http://localhost:3002/produtosParaEdicao/${guardaSecaoDoCardapio}`)
+                      .then(response => response.json())
+                      .then(resposta => SetLidaComPedidosCadastrar(resposta))
+                      .catch(error => {
+                        Swal.fire(
+                          'Erro!',
+                          'Houve algum erro ao atualizar a listagem dos produtos, recarregue a pagina.',
+                          'error'
+                        )
+                      })
+                    }) 
+                })
+                .catch(error => {
+                  console.log(error)
+                  // alert("produto Não atualizado")
+                  Swal.fire(
+                    'Erro!',
+                    'Não foi descongelar o produto, tente novamente.',
+                    'error'
+                  )
+                })
+                }
+              })
+        break;
+      case 1:
+        console.log("É para congelar")
+        console.log(dadosProd)
+        Swal.fire({
+          title: 'Você deseja congelar o produto?',
+          text: "Ao congelar o produto ele não ficará disponivel na plataforma",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Congelar produto',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios
+            .put(`http://localhost:3002/comgelamentoProdutos/${idCongelamento}`, dadosProd)
+            .then((response) => {
+                console.log(response.status)
+                // alert("produto atualizado")
+                Swal.fire(
+                  'Sucesso!',
+                  'Produto congelado.',
+                  'success'
+                ).then(response => {
+                  fetch(`http://localhost:3002/produtosParaEdicao/${guardaSecaoDoCardapio}`)
+                    .then(response => response.json())
+                    .then(resposta => SetLidaComPedidosCadastrar(resposta))
+                    .catch(error => {
+                      Swal.fire(
+                        'Erro!',
+                        'Houve algum erro ao atualizar a listagem dos produtos, recarregue a pagina.',
+                        'error'
+                      )
+                    })
+                  }) 
+              })
+              .catch(error => {
+                console.log(error)
+                // alert("produto Não atualizado")
+                Swal.fire(
+                  'Erro!',
+                  'Não foi congelar o produto, tente novamente.',
+                  'error'
+                )
+              })
+              }
+            })
+        
+          // .then((resposta) => setItensParaSelecaoEdicao(resposta));
+        break;
+    
+      default:
+        break;
+    }
   }
 
   return(
@@ -344,6 +620,7 @@ function Edicoes() {
                             <td className="algun4">
                               <button  onClick={() => habilitaTelaEditar(itemSelecionado)}>Editar</button>
                               <button onClick={() => excluiProdutoCardapio(itemSelecionado.id)}>Excluir</button>
+                              {itemSelecionado.ativo == 0 ? <button className='deveSerCongelado' onClick={() => congelamentodoProd({idCongelamento: itemSelecionado.id, statusCongelamento: 1})}>Congelar</button> : <button className='naoDeveSerCongelado' onClick={() => congelamentodoProd({idCongelamento: itemSelecionado.id, statusCongelamento: 0})}>Descongelar</button>}
                             </td>
                           </tr>
                         );
@@ -380,10 +657,10 @@ function Edicoes() {
               
                 </table>) : (
                 
-                <div>
+                <div className='areaEditProduto'>
                   <div className="edicaoTopo">
-                    <div className="edicaoVoltar"><button onClick={() => SetTelaDeEdição(!telaDeEdição)}>Voltar</button></div>
-                    <div className="edicaoTitulo"><h1 onClick={() => console.log(produtoParaSerEditado)}>Edição do produto {produtoParaSerEditado.id}</h1></div>
+                    <div className="edicaoVoltar"><button onClick={() => voltarListaDeProdutos()}>Voltar</button></div>
+                    <div className="edicaoTitulo">Edição do produto: <span>{nomeDoProdutoParaSerEditado}</span></div>
                   </div>
 
                   <div>
@@ -403,9 +680,19 @@ function Edicoes() {
                         <input name="descricao" id="DescricaoForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} value={produtoParaSerEditado.descricao}/>
                       </div>
 
-                      <div className="edicaoInputsoForm">
-                        <label htmlFor="imagem">Imagem</label>
-                        <input name="imagem" id="ImagemForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.imagem}/>
+                      <div className="divLabeledicao_imagemProd">
+                        Imagem atual do produto
+                      </div>
+                      <div className="edicaoInputsoForm, edicao_imagemProd">
+                        <div className='edicao_imagemProdBorda1'>
+                          <img src={produtoParaSerEditado.imagem} alt="" srcset="" />
+                        </div>
+                        <div className='escolherEditarImagem edicao_imagemProdBorda2'>
+                          <div className=''>
+                            <input ref={imgEscolhidaFirebaseEdicao} name="imagem" id="ImagemForm" className="InputsForm" type="file" onChange={(event)=> handleUoloadImageFirebaseEdicao(imgEscolhidaFirebaseEdicao.current)} placeholder={produtoParaSerEditado.imagem}/>
+                            <br />{!imgUrlEdicao && <progress value={progressaoUploadEdicao} max="100"/>}
+                          </div>
+                        </div>
                       </div>
                       
                       <div className="edicaoInputsoForm">
@@ -437,7 +724,7 @@ function Edicoes() {
                         {/* <label htmlFor="descricao">Items do produto (Programar)</label>
                         <input name="descricao" id="DescricaoForm" className="InputsForm" type="text" onChange={(event) => handleChange(event)} placeholder={produtoParaSerEditado.descricao}/>*/}
                         <div className='divEdicaoDosItensDoProduto'>
-                          <div>
+                          <div className='divSelecionaItensEdit'>
 
                             <div className="selecionaOsItems">
                               <label htmlFor="itens">Selecione os itens </label> <br />
@@ -449,17 +736,17 @@ function Edicoes() {
                               </select>
                             </div>
 
-                            <div className="selecionaQntItems">
-                              <label htmlFor="itens">Quantidade do item </label>{" "} <br />
+                            <div className="selecionaQntItemsEdit">
+                              <label htmlFor="itens">Quantidade do item </label><br />
                               <input ref={qntItemDeMontagemProdutoEdicao} type="" name="" />
                             </div>
 
-                            <div className="adicionaItemsEQuant">
+                            <div className="adicionaItemsEQuantEdit">
                               <button type="button" onClick={(event) => adicionaItensEdicao(event)}>Adicionar item</button>
                             </div>
 
                           </div>
-                          <div>tabela com os items
+                          <div>
                             <table>
                               <thead>
                                 <tr>
@@ -495,8 +782,8 @@ function Edicoes() {
 
                       </div>
 
-                      <div className="edicaoInputsoForm">
-                        <button type="submit">Salvar</button>
+                      <div className="edicaoInputsoFormEdit">
+                        <button type="submit">Salvar alterações</button>
                       </div>
                     </form>
                   </div>

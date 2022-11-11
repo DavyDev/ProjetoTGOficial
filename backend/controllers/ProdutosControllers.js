@@ -6,13 +6,15 @@ class ProdutosController {
     async CreateProduto(req, res, next) {
         let trataBody = {
             titulo: req.body.titulo,
-            // descricao: req.body.descricao,
+            ativo: req.body.ativo,
             imagem: req.body.imagem,
             cardapio:  req.body.cardapio,
             preco: Number(req.body.preco),
             descricao: req.body.itemsEquantidades,
             dadosParaEstoque: JSON.stringify(req.body.itemsEquantidades)
         }
+        console.log("belele")
+        console.log(req.body)
         console.log("belele")
     
         // console.log(trataBody)
@@ -89,7 +91,39 @@ class ProdutosController {
             console.log("Parametro não existe")
             const ListDosProdutos = await CadastrarProdutos.findAll({
                 where: {
-                  cardapio: cardapio
+                  cardapio: cardapio,
+                  ativo: 0
+                }
+              })
+            //   console.log(ListDosProdutos)
+              return res.status(200).json(ListDosProdutos)
+        }
+
+
+        /*const ListDosProdutos = await CadastrarProdutos.findAll();
+        //const ListDosProdutos = await CadastrarProdutos.findByPk(id);
+        if(!ListDosProdutos) return res.status(404).json("Não existe produtos para ser Listado");
+        return res.status(200).json(ListDosProdutos)*/
+    }
+
+    async ListProdutosParaEdicao(req, res, next) {
+        console.log("-------------")
+        const { cardapio } = req.params
+        const validaExisteParams = Boolean(cardapio)
+        console.log(cardapio)
+        console.log(Boolean(cardapio))
+        console.log("-------------")
+
+        if(validaExisteParams == false ){
+            const ListDosProdutos = await CadastrarProdutos.findAll();
+            if(!ListDosProdutos) return res.status(404).json("Não existe produtos para ser Listado");
+            return res.status(200).json(ListDosProdutos)
+        }
+        else if(validaExisteParams == true){
+            console.log("Parametro não existe")
+            const ListDosProdutos = await CadastrarProdutos.findAll({
+                where: {
+                  cardapio: cardapio,
                 }
               })
             //   console.log(ListDosProdutos)
@@ -134,11 +168,35 @@ class ProdutosController {
               id: req.body.id
            }
           });
+        const produtoAtualizadoConfirmacao = await CadastrarProdutos.findByPk(req.body.id);
+
+        console.log("++++++++++++++++++++++++++++++++")
+        console.log(produtoAtualizadoConfirmacao)
+        console.log("++++++++++++++++++++++++++++++++")
+          
+        produtoAtualizadoConfirmacao && res.status(200).json({sucesso: "Produto atualizado", produtoAtualizado: produtoAtualizadoConfirmacao})
+        !produtoAtualizadoConfirmacao && res.status(400).json({erro: "Não foi possivel atualizar produto"})
 
         // return res.json({
         //     id: id,
         //    body: trataBody
         // })
+    }
+
+    async UpdateDeCongelamentoProdutos(req, res, next) {
+        console.log(req.body)
+
+        const atualizacaoCongelamento = await CadastrarProdutos.update({ativo: req.body.statusCongelamento}, {
+            where: {
+              id: req.body.idCongelamento
+           }
+        });
+        console.log(atualizacaoCongelamento)
+        console.log("---------------------------")
+        atualizacaoCongelamento == 1 && res.status(200).json({sucesso: "Produto atualizado"})
+        atualizacaoCongelamento != 1 && res.status(400).json({erro: "Não foi possivel atualizar produto"})
+
+        
     }
 
     async DeleteProdutos(req, res, next) {

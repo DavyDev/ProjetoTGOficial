@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import "./style.css";
+import { storageFirebase } from "../../../firebase";
+import Swal from 'sweetalert2'
 
 function Cadastros() {
   const [observaExclusaoDeItens, setObservaExclusaoDeItens] = useState([]);
@@ -8,6 +11,53 @@ function Cadastros() {
   const [armazenaItemsEcolhidos, setArmazenaItemsEcolhidos] = useState([]);
   const itemDeMontagemProduto = useRef(null);
   const qntItemDeMontagemProduto = useRef(null);
+  const prodCongelado = useRef("0");
+
+
+  //Relacionadas ao Firebase e suas configurações
+  const [imgUrl, setImgUrl] = useState("")
+  const [progressaoUpload, setProgressaoUpload] = useState(0)
+
+  const imgEscolhidaFirebase = useRef(null)
+
+  const handleUoloadImageFirebase = (event) => {
+    setImgUrl("")
+    // const fileImg = event.split("\\", -1)
+
+    const file = event.files[0]
+    
+    console.log(file)
+    if(!file) return;
+
+    const storageRef = ref(storageFirebase, `images/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(((snapshot.bytesTransferred / snapshot.totalBytes) * 100))
+        setProgressaoUpload(progress)
+      },
+      error => {
+        alert(error)
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(url => {
+          setImgUrl(url)
+          Swal.fire({
+            title: 'Obaa!',
+            text: 'Upload da imagem realizado com sucesso.',
+            imageUrl: url,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+          })
+        })
+      }
+    )
+  }  
+  
+  //---------------------------------------------
 
   const testezinhobb = (event) => {
     event.preventDefault();
@@ -25,29 +75,75 @@ function Cadastros() {
   const cadastrandoDadosProduto = (event) => {
     event.preventDefault();
 
-    
-    axios
-      .post("http://localhost:3002/produtos", {
-        titulo: event.target.titulo.value,
-        // descricao: event.target.descricao.value,
-        imagem: event.target.imagem.value,
-        cardapio: event.target.cardapio.value,
-        preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
-        itemsEquantidades: armazenaItemsEcolhidos
-      })
-      //.then((resposta) => resposta.json())
-      .then((resposta) => console.log(resposta.data))
-      .catch(() => console.log("Deu Errado"));
-
-    console.log({
-        titulo: event.target.titulo.value,
-        // descricao: event.target.descricao.value,
-        imagem: event.target.imagem.value,
-        cardapio: event.target.cardapio.value,
-        preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
-        itemsEquantidades: armazenaItemsEcolhidos
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Seu produto sera criado e ficara disponivel para compra",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, criar produto',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post("http://localhost:3002/produtos", {
+          titulo: event.target.titulo.value,
+          ativo: prodCongelado.current.value,
+          imagem: imgUrl,
+          cardapio: event.target.cardapio.value,
+          preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
+          itemsEquantidades: armazenaItemsEcolhidos
+        })
+          //.then((resposta) => resposta.json())
+          .then((resposta) => {
+            Swal.fire(
+              'Sucesso!',
+              'Seu produto foi criado, e está disponivel para compra na plataforma.',
+              'success'
+            )
+            event.target.titulo.value = ''
+            event.target.cardapio.value = ''
+            event.target.preco.value = ''
+            event.target.imagem.value = ''
+            event.target.itens.value = ''
+            event.target.qntItens.value = ''
+            setArmazenaItemsEcolhidos([])
+          })
+          .catch(() => {
+            Swal.fire(
+              'Erro!',
+              'Não foi possivel realizar a criação do produto, verifique se todos os campos foram preenchidos.',
+              'error'
+            )
+            console.log()
+          });
+        
       }
-    )
+    })
+
+    
+    // axios
+    //   .post("http://localhost:3002/produtos", {
+    //     titulo: event.target.titulo.value,
+    //     // descricao: event.target.descricao.value,
+    //     imagem: imgUrl,
+    //     cardapio: event.target.cardapio.value,
+    //     preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
+    //     itemsEquantidades: armazenaItemsEcolhidos
+    //   })
+    //   //.then((resposta) => resposta.json())
+    //   .then((resposta) => console.log(resposta.data))
+    //   .catch(() => console.log("Deu Errado"));
+
+    // console.log({
+    //     titulo: event.target.titulo.value,
+    //     // descricao: event.target.descricao.value,
+    //     imagem: imgUrl,
+    //     cardapio: event.target.cardapio.value,
+    //     preco: Number((event.target.preco.value).replace(",", ".")).toFixed(2),
+    //     itemsEquantidades: armazenaItemsEcolhidos
+    //   }
+    // )
     
   };
 
@@ -72,6 +168,8 @@ function Cadastros() {
     console.log("Observa  exclusão mudou");
   }, [armazenaItemsEcolhidos]);
 
+  console.log(progressaoUpload)
+
   return (
     <div className="divCadastraProduto">
       <div>
@@ -81,17 +179,11 @@ function Cadastros() {
             <div className="edicaoInputsoForm">
               <label htmlFor="titulo">Titulo</label>
               <br />
-              <input name="titulo" />
+              <input required name="titulo"  />
             </div>
-
-            {/* <div className="edicaoInputsoForm">
-              <label htmlFor="descricao">Descrição</label> <br />
-              <input name="descricao" />
-            </div> */}
-
             <div className="edicaoInputsoForm">
               <label htmlFor="cardapio">Menu do Cardapio</label> <br />
-              <select name="cardapio">
+              <select required name="cardapio" >
                 <option value="">Selecione uma opção</option>
                 <option value="tapiocacrepioca">Tapioca/Crepioca</option>
                 <option value="lanches">Lanches</option>
@@ -106,12 +198,22 @@ function Cadastros() {
 
             <div className="edicaoInputsoForm">
               <label htmlFor="preco">Preço </label> <br />
-              <input name="preco" placeholder="R$"/>
+              <input required name="preco" placeholder="R$"/>
+            </div>
+
+            <div className="edicaoInputsoForm">
+              <label htmlFor="ativo">Congelar pedido </label> <br />
+              <select required name="ativo" ref={prodCongelado}>
+                  <option value="">Selecione uma opção</option>
+                  <option value={1}>Sim</option>
+                  <option value={0}>Não</option>
+                </select>
             </div>
 
             <div className="edicaoInputsoForm">
               <label htmlFor="imagem">Imagem</label> <br />
-              <input type="file" accept="image/jpeg" name="imagem" />
+              <input required name="imagem" ref={imgEscolhidaFirebase} type="file" onChange={()=> handleUoloadImageFirebase(imgEscolhidaFirebase.current)} />
+              <br />{!imgUrl && <progress value={progressaoUpload} max="100"/>}
             </div>
           </div>
 
@@ -120,7 +222,7 @@ function Cadastros() {
             <div className="edicaoInputsoFormTeste">
               <div className="selecionaOsItems">
                 <label htmlFor="itens">Selecione os itens </label> <br />
-                <select name="itens" ref={itemDeMontagemProduto}>
+                <select required name="itens" ref={itemDeMontagemProduto}>
                   <option value="">Selecione uma opção</option>
                   {itensParaSelecao.map((item, i) => {
                     return <option value={item.nomeItem}>{item.nomeItem}</option>;
@@ -135,7 +237,7 @@ function Cadastros() {
               <div className="selecionaQntItems">
                 
                 <label htmlFor="itens">Quantidade do item </label>{" "} <br />
-                <input ref={qntItemDeMontagemProduto} type="" name="" />
+                <input required ref={qntItemDeMontagemProduto} type="" name="qntItens" />
                  
               </div>
               <div className="adicionaItemsEQuant">

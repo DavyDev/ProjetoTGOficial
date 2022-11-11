@@ -33,18 +33,25 @@
 }
 
 .adicionaItemsEQuant button{
-    padding: 5px 15px;
-    border-radius: 3px;
-    border: 1px solid #000;
+    background-color: #ccc;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 5px 15px;
+  outline: none;
+  font-family: "PoppinsMedium";
+  font-size: 13px;
 
 }
 
 .adicionaItemsEQuant button:hover{
-    padding: 6px 15px;
-    border-radius: 3px;
-    border: 1px solid #000;
-    background-color: #dbdbdb;
-    cursor: pointer;
+  background-color: #a2a2a2;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 5px 15px;
+  outline: none;
+  font-family: "PoppinsMedium";
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .divCadastraProduto{
@@ -79,8 +86,9 @@ form input, select{
     margin-top: 10px;
     border-radius: 2px;
     border: 1px solid #464646;
-    padding: 5px 10px;
+    padding: 5px 3px;
     outline: none;
+    
 }
 
 .tabelaItensEscolhidos table{
@@ -154,7 +162,7 @@ form input, select{
 
 .edicaoInputSalvar button{
     padding: 10px 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "PoppinsMedium";
     font-weight: bold;
     font-size: 16px;
     border-radius: 5px;
@@ -164,7 +172,7 @@ form input, select{
 }
 .edicaoInputSalvar button:hover{
     padding: 10px 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "PoppinsMedium";
     font-weight: bold;
     font-size: 16px;
     border-radius: 5px;
@@ -172,4 +180,8 @@ form input, select{
     border: 1px solid rgb(162, 162, 162);
     outline: none;
     cursor: pointer;
+}
+
+progress{
+    width: 100%;
 }

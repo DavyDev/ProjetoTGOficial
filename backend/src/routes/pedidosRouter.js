@@ -12,14 +12,6 @@ const ConsultaPedidosSolicitados = require('../../controllers/ConsultaPedidosSol
 const TesteLoginUser = require('../../controllers/SessionControllerLogin')
 const ItensControllers = require('../../controllers/ItensControllers')
 const SujestoesDeClientes = require('../../controllers/SujestoesDeCientes')
-//const CadastrarProdutos = require('../../models/CadastrarProdutos')
-//Linha que irá pegar e fornecer os dados de cada pedido 
-const dadosFornecidos = require('../../data/pedidos')
-
-//EXEMPLO: Aqui passa por uma (Middleware) Exemplo
-const middlewareA = require('../../middlewares/middewareA')
-const { response } = require('../../config/configApplication')
-const { urlencoded } = require('body-parser')
 const ClienteESeusDadosEInformacoes = require('../../controllers/ClienteESeusDadosEInformacoes')
 
 
@@ -27,6 +19,7 @@ const ClienteESeusDadosEInformacoes = require('../../controllers/ClienteESeusDad
 router.get('/produtos/', ProdutosController.ListProdutos)
 router.post('/produtos', urlencodedParser, ProdutosController.CreateProduto)
 router.put('/produtos/:id', urlencodedParser, ProdutosController.UpdateProdutos)
+router.put('/comgelamentoProdutos/:id', urlencodedParser, ProdutosController.UpdateDeCongelamentoProdutos)
 router.delete('/produtos/:id', urlencodedParser, ProdutosController.DeleteProdutos)
 
 
@@ -34,6 +27,7 @@ router.get('/pedidosSolicitados', ConsultaPedidosSolicitados.ConsultaTodosOsPedi
 
 //Este da um get somente dos que pertencem ao parametro parametro
 router.get('/produtos/:cardapio', ProdutosController.ListProdutos)
+router.get('/produtosParaEdicao/:cardapio', ProdutosController.ListProdutosParaEdicao)
 
 
 router.get('/pedidosFeitos/cliente/:codigoCliente', ClientesESeusPedidosController.NomeClienteDoPedido)

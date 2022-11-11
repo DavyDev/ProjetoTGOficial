@@ -6,6 +6,8 @@ import CardapioHeader from '../../../../assets/icons/CardapioHeader/CardapioHead
 import setaCardapio from '../../../../assets/icons/CardapioHeader/SetaCardapio.png';
 import { ContextoLogin } from '../../../../contexts/ContextoLogin/context';
 
+import Swal from 'sweetalert2'
+
 const DropDownButton = () => {
   
   const [resFetchData, setResFetchData] = useState('');
@@ -39,12 +41,23 @@ const DropDownButton = () => {
   let seis = ""
   
   const achaPosicaoElemento = (idElemento) => {
-    let positionElement = document.getElementById(`${idElemento}`).getBoundingClientRect().y
-    positionElement = (positionElement - 150)
+    if(document.getElementById(`${idElemento}`)){
+      let positionElement = document.getElementById(`${idElemento}`).getBoundingClientRect().y
+      positionElement = (positionElement - 150)
+      
+      document.documentElement.scrollBy(0 , positionElement)
+    }
+    else{
+      console.log("teste")
+      Swal.fire(
+        'Aviso!',
+        'No momento não foram lançados produtos para essa seção do cardápio, aguarde para os proximos lançamentos que virão.',
+        'warning'
+      )
+    }
     //     positionElement = positionElement.y - 824
   //     // positionElement = 824 + positionElement
   //   // positionElement.addEventListener('click', (ev) => {
-    document.documentElement.scrollBy(0 , positionElement)
   // //   })
   //   console.log(window.innerHeight)
   //   console.log(positionElement)

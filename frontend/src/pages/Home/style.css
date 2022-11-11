@@ -2,24 +2,16 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-
-  
-  
 }
 html{
   scroll-behavior: smooth;
 }
-
 body{
   padding: 65px 0px 0px 0px;
 }
-
-
 .DivHome{
   display: block;
-
 }
-
 .header{
   width: 600px;
   border-color: violet;

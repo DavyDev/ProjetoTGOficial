@@ -129,7 +129,7 @@ function ProdutosLoja() {
   return (
     <div className='secaoDasSecoes'>
       <div className='SecaoMenu'>
-        <h2 id="Tapiocas" className="title_MenuMain">Tapiocas/Crepiocas</h2>
+        {pedidosTapiocaCrepioca.length == 0 ? <div></div> : <h2 id="Tapiocas" className="title_MenuMain">Tapiocas/Crepiocas</h2>}
 
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -149,7 +149,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}
@@ -157,7 +157,8 @@ function ProdutosLoja() {
       </div>
 
       <div className='SecaoMenu'>
-        <h2 id="Lanches" className="title_MenuMain">Lanches</h2>
+        {pedidosLanches.length == 0 ? <div></div> : <h2 id="Lanches" className="title_MenuMain">Lanches</h2>}
+        
 
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -177,7 +178,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}
@@ -186,7 +187,9 @@ function ProdutosLoja() {
       </div>
 
       <div className='SecaoMenu'>
-        <h2 id="Saladas" className="title_MenuMain">Saladas</h2>
+        {pedidosSaladas.length == 0 ? <div></div> : <h2 id="Saladas" className="title_MenuMain">Saladas</h2>}
+
+        
         
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -206,7 +209,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}
@@ -215,7 +218,7 @@ function ProdutosLoja() {
       </div>
 
       <div className='SecaoMenu'>
-        <h2 id="Bebidas" className="title_MenuMain">Bebidas</h2>
+        {pedidosBebidas.length == 0 ? <div></div> : <h2 id="Bebidas" className="title_MenuMain">Bebidas</h2>}
 
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -235,7 +238,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}
@@ -243,7 +246,7 @@ function ProdutosLoja() {
       </div>
 
       <div className='SecaoMenu'>
-        <h2 id="Sobremesas" className="title_MenuMain">Sobremesas</h2>
+        {pedidosSobremesas.length == 0 ? <div></div> : <h2 id="Sobremesas" className="title_MenuMain">Sobremesas</h2>}
 
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -263,7 +266,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}
@@ -271,7 +274,7 @@ function ProdutosLoja() {
       </div>
 
       <div className='SecaoMenu'>
-        <h2 id="Doces" className="title_MenuMain">Doces</h2>
+        {pedidosDoces.length == 0 ? <div></div> : <h2 id="Doces" className="title_MenuMain">Doces</h2>}
 
         <div className='Pedidos'>
           {/* <button onClick={mostrandoDados}>Tesando</button> */}
@@ -291,7 +294,7 @@ function ProdutosLoja() {
                 </div>
               </div>
               <div className="ImagemPedido">
-                {carro.imagem}
+                <img src={carro.imagem} alt="" srcset="" />
               </div>
             </div>)
           })}

@@ -165,7 +165,7 @@ export function BoardTeste(params) {
                 console.log(reorderItem)
                 //console.log(cliente.emailCliente)
                 axios.post(
-                    'https://api.z-api.io/instances/3A81587077E9B01C58110A656FDF5A1E/token/6E7CB8F4175058C55F52CAEE/send-messages',
+                    'https://api.z-api.io/instances/3B2607DFAE3010CCBD35A2CB4232B497/token/CD1181DC5BA2BF1411BD2F6A/send-messages',
                     {
                     "phone": `${reorderItem.passwordCliente}`,
                     "message": `Prontinho seu pedido ${reorderItem.emailCliente} já esta sendo preparado`
@@ -182,7 +182,7 @@ export function BoardTeste(params) {
             case "pronto":
                 console.log("Esta pronto")
                 axios.post(
-                    'https://api.z-api.io/instances/3A81587077E9B01C58110A656FDF5A1E/token/6E7CB8F4175058C55F52CAEE/send-messages',
+                    'https://api.z-api.io/instances/3B2607DFAE3010CCBD35A2CB4232B497/token/CD1181DC5BA2BF1411BD2F6A/send-messages',
                     {
                     "phone": `${reorderItem.passwordCliente}`,
                     "message": `Obaaaaa! 😋 ${reorderItem.emailCliente} seu pedido ja esta pronto basta retirar no estabelecimento Deck Café.`
